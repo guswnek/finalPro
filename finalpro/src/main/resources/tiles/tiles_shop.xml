@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+	
+<tiles-definitions>
+	
+	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+	
+	<definition name="magazineLayout" template="/WEB-INF/views/common/layout.jsp">
+      <put-attribute name="title" value="" />
+      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="side" value="" />
+      <put-attribute name="body" value="" />
+      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+   </definition>
+	
+	
+	
+	
+	<definition name="main" extends="baseLayout">
+		<put-attribute name="title" value="쇼핑몰 홈페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+	</definition>
+	
+	<definition name="/styleall/brandSnap" extends="baseLayout">
+		<put-attribute name="title" value="브랜드 스냅샷 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/styleall/brandSnap.jsp" />
+	</definition>
+	
+	<definition name="/styleall/streetSnap" extends="baseLayout">
+		<put-attribute name="title" value="스트릿 스냅샷 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/styleall/streetSnap.jsp" />
+	</definition>
+	
+	<definition name="/styleall/personalColor" extends="baseLayout">
+		<put-attribute name="title" value="퍼스널컬러 페이지 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/styleall/personalColor.jsp" />
+	</definition>
+	
+	<definition name="/product/productInfo" extends="baseLayout">
+		<put-attribute name="title" value="제품 상세 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/productInfo.jsp" />
+	</definition>
+	
+	<definition name="/styleall/brandSnapInfo" extends="baseLayout">
+		<put-attribute name="title" value="브랜드 스냅 상세 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/styleall/brandSnapInfo.jsp" />
+	</definition>
+	
+	<definition name="/product/productRankingList" extends="baseLayout">
+		<put-attribute name="title" value="랭킹 순위 제품 리스트 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/productRankingList.jsp" />
+	</definition>
+	
+	<definition name="/brand/brandList" extends="baseLayout">
+		<put-attribute name="title" value="브랜드 리스트 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/brand/brandList.jsp" />
+	</definition>
+	
+	
+	
+	
+	<!-- 유진 상품 목록창 -->
+	<definition name="/product/listProducts" extends="baseLayout">
+		<put-attribute name="title" value="상품목록창" />
+		<put-attribute name="body" value="/WEB-INF/views/product/productList.jsp"/>
+	</definition>
+
+	
+	
+	
+	
+	
+	
+	<definition name="/product/detailProduct" extends="baseLayout">
+		<put-attribute name="title" value="상품상세창" />
+		<put-attribute name="body" value="/WEB-INF/views/product/detailProduct.jsp" />
+	</definition>
+	
+	
+	
+	
+	<!-- 매거진 -->
+	<definition name="/magazine/pictorialInfo" extends="magazineLayout">
+      <put-attribute name="title" value="화보/매거진" />
+      <put-attribute name="side" value="/WEB-INF/views/magazine/side2.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/magazine/pictorialInfo.jsp" />
+   </definition>
+   
+   <definition name="/magazine/lookbookInfo" extends="magazineLayout">
+      <put-attribute name="title" value="룩북/매거진" />
+      <put-attribute name="side" value="/WEB-INF/views/magazine/side3.jsp" />
+      <put-attribute name="body" value="/WEB-INF/views/magazine/lookbookInfo.jsp" />
+   </definition>
+   
+   
+   <definition name="/magazine/pictorialList" extends="magazineLayout">
+		<put-attribute name="title" value="화보 리스트 페이지" />
+		<put-attribute name="side" value="/WEB-INF/views/magazine/side.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/magazine/pictorialList.jsp" />
+	</definition>
+	
+	
+	<definition name="/magazine/lookbookList" extends="magazineLayout">
+		<put-attribute name="title" value="룩북 리스트 페이지" />
+		<put-attribute name="side" value="/WEB-INF/views/magazine/side.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/magazine/lookbookList.jsp" />
+	</definition>
+   
+   
+   
+	
+	<!-- 로그인 페이지 -->
+	<definition name="baseLayin" template="/WEB-INF/views/common/layout2.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+<!-- 	<definition name="/member/loginForm" extends="baseLayin">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
+	</definition> -->
+	
+	<!-- 검색 페이지 -->
+	<definition name="baseLayon" template="/WEB-INF/views/common/layout3.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+	<definition name="/member/searchForm" extends="baseLayon">
+		<put-attribute name="title" value="검색창" />
+		<put-attribute name="body" value="/WEB-INF/views/member/searchForm.jsp" />
+	</definition>
+	
+	
+	<!-- 검색 리스트 페이지 -->
+	<definition name="/product/searchList" extends="baseLayout">
+		<put-attribute name="title" value="검색 상품"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/searchList.jsp"/>
+	</definition>
+	
+	<definition name="/product/searchDetailList" extends="baseLayout">
+		<put-attribute name="title" value="검색 상품"/>
+		<put-attribute name="body" value="/WEB-INF/views/product/searchDetailList.jsp"/>
+	</definition>
+	
+	
+	<definition name="analyzeImage" extends="baseLayout">
+      <put-attribute name="title" value="색상 검색창" />
+      <put-attribute name="body" value="/WEB-INF/views/product/analyzeImage.jsp" />
+   </definition>
+	
+	
+	
+	<!-- 고객센터 페이지 -->
+	<definition name="/member/customerService" extends="baseLayon">
+		<put-attribute name="title" value="고객센터" />
+		<put-attribute name="body" value="/WEB-INF/views/member/customerService.jsp" />
+	</definition>
+	
+	
+</tiles-definitions>

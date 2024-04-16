@@ -1,0 +1,236 @@
+@charset "UTF-8";
+
+#all {
+	width: 700px;
+	overflow: hidden; /* 넘치는 내용을 숨김 */
+	margin: 0 auto;;
+	background-color: #ffffff;
+}
+
+#cancel {
+	float: right;
+}
+
+.search_container {
+	background-color: #fff;
+}
+
+.search_wrap {
+	flex: 1;
+	padding: 8px 10px;
+	margin-right: 12px;
+	margin-left: auto;
+	height: 66px;
+}
+
+.search_area {
+	flex: 1;
+	margin-right: 12px;
+	padding: 0 30px 0 10px;
+	font-size: 15px;
+	font-weight: 700px;
+	letter-spacing: -.21px;
+	transition: all .1s;
+	width: 100%;
+	background-color: #f4f4f4;
+	border-radius: 8px;
+	height: 110%;
+	position: relative;
+}
+
+.content_wrap {
+	height: calc(100vh - 65px);
+	padding: 20px 16px;
+	background-color: #fff;
+}
+
+.search_card_items {
+	padding-bottom: 20px;
+}
+
+.layver_search_item.tag {
+	padding-bottom: 40px;
+}
+
+.layer_search_item {
+	display: block;
+}
+
+.search {
+	position: relative;
+	padding: 0 30px 0 10px;
+	background-color: #f4f4f4;
+	border-radius: 8px;
+	height: 66px;
+	border: none;
+}
+
+.input_search {
+	height: 66px;
+	letter-spacing: -.21px;
+	transition: all .1s;
+	width: calc(100% - 40px);
+	background-color: #f4f4f4;
+	border: none;
+	outline: none;
+}
+
+.search img {
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	transform: translateY(-50%);
+	height: auto;
+	width: auto;
+}
+
+.input {
+	-webkit-appearance: none;
+	background-color: transparent;
+	border: 0;
+	border-radius: 0;
+	outline: 0;
+	padding: 0;
+	resize: none;
+	height: 100px;
+}
+
+.btn_search_delete {
+	height: 20px;
+	right: 10px;
+	top: 12px;
+	width: 20px;
+	position: absolute;
+}
+
+button {
+	appearance: none;
+	background: none;
+	background-color: transparent;
+	border: 0;
+	border-radius: 0;
+	outline: none;
+	padding: 0;
+}
+
+.btn_close {
+	font-size: 15px;
+	margin-left: auto;
+}
+
+
+
+.layer_search_item.recent_keywords {
+	padding-bottom: 32px;
+}
+
+.layer_search_title_wrap {
+	margin-bottom: 12px;
+}
+
+.title_sub_text {
+	float: right;
+	color: rgba(34, 34, 34, .8);
+	display: inline;
+	font-size: 13px;
+	margin-left: 5px;
+}
+
+.search_card_tag_wrap {
+	line-height: 13px;
+}
+
+.layer_search.search_list {
+	margin-top: 4px;
+}
+
+.search_list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+
+
+.layer_search_item {
+	text-align: left;
+	padding-bottom: 40px;
+	display: block;
+}
+
+.layer_search_title_wrap {
+	margin-bottom: 12px;
+	color: rgba(34, 34, 34, .8);
+	display: inline;
+	font-size: 20px;
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+.title_sub_text {
+	float: right;
+	margin-bottom: 12px;
+	color: rgba(34, 34, 34, .8);
+	display: inline;
+	font-size: 13px;
+	margin-left: 5px;
+}
+
+li, ol {
+	list-style: none;
+}
+
+.search_card_ranking {
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	display: block;
+	padding: 0;
+	font-weight: 400;
+	margin-right: 6px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	column-count: 2; /* 2개의 컬럼으로 나눔 */
+	column-gap: 40px; /* 컬럼 사이의 간격 */
+}
+
+.search_card_ranking2 {
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	display: block;
+	padding: 0;
+	font-weight: 400;
+	margin-right: 6px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.search_card_ranking_item {
+	cursor: pointer;
+	display: block;
+	text-align: left;
+	padding: 4px 0 16px;;
+}
+
+a {
+	text-decoration: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, .1);
+	color: inherit;
+}
+
+.ranking_idx {
+	font-weight: 600;
+	margin-right: 6px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.ranking_title {
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	display: inline-block;
+	vertical-align: middle;
+	font-weight: 400;
+	margin-right: 6px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

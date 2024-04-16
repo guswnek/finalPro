@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+.customer_service {
+	width: 1600px;
+	overflow: hidden;
+}
+
+.flex-container {
+    display: flex; /* This enables flexbox layout */
+    align-items: flex-start; /* Aligns items at the start of the container */
+}
+
+.title2 {
+    flex: 0 1 auto; /* This allows title2 to grow and shrink but not fill the space entirely */
+    margin-right: 10px; /* Reduced or remove this margin as needed */
+}
+
+.title3 {
+    display: flex;
+    flex-direction: column; /* Stacks flex items vertically */
+    flex: 0 1 auto; /* This allows title3 to grow and shrink but not fill the space entirely */
+    margin-top: 20px;
+}
+
+.title3 a {
+    margin-bottom: 10px; /* Adjust the space between links as needed */
+}
+
+
+a.myOrder, a.FindId, a.FindPass {
+    text-decoration: none; /* Removes the underline */
+    padding: 10px 20px; /* Adds some padding inside the links to make them look like buttons */
+    border: 1px solid #000; /* Adds a border to the links */
+    background-color: #f2f2f2; /* Adds a background color */
+    color: #000; /* Sets the text color */
+    border-radius: 5px; /* Rounds the corners of the links */
+    display: inline-block; /* Ensures padding and height are respected */
+    cursor: pointer; /* Changes the mouse cursor to indicate it's clickable */
+    margin: 5px; /* Adds some space between the buttons */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for buttons */
+a.myOrder:hover, a.FindId:hover, a.FindPass:hover {
+    background-color: #ddd; /* Changes background color on hover */
+}
+
+.time {
+	margin-top: 30px;
+}
+
+
+.user-email {
+	margin-top: 27px;
+}
+
+.main {
+	padding-bottom: 30px;
+	border-bottom: 1px solid #ddd;
+}
+
+
+
+
+/* FAQ */
+
+.CFaqTableHeader, .CFaqTableItem__list {
+    display: flex;
+}
+
+
+.CFaqTableHeader {
+    font-weight: bold; /* If you want the headers to be bold */
+}
+
+.CFaqTableHeader__category, .CFaqTableItem__category {
+    flex-basis: 20%; /* Adjust the width as needed */
+    text-align: left; /* Align text to the start/left */
+    
+}
+
+.CFaqTableHeader__title, .CFaqTableItem__question {
+    flex-grow: 1; /* Takes the remaining space */
+    text-align: left; /* Align text to the start/left */
+    cursor: pointer;
+}
+
+/* The following styles are to hide and show the answer content */
+.CFaqTableItem__contents-box {
+    display: none; /* This should be hidden by default */
+}
+
+.CFaqTableItem--active .CFaqTableItem__contents-box {
+    display: flex;
+    margin-left: 140px;
+    color: rgb(145, 145, 145);
+}
+
+.CFaqTableItem__answer {
+	margin-top: 15px;
+	
+}
+
+
+.CFaqTableItem__contents {
+	margin-left: 148px;
+}
+
+
+
+
+
+.CFaqTableItem__category {
+    text-align: center; 
+    padding-top: 15px;
+    
+}
+
+.CFaqTableHeader__category {
+	text-align: center;
+}
+
+.CFaqTableHeader__title {
+	text-align: center;
+}
+
+.CFaqTableHeader {
+	border-top: 2px solid;
+	border-bottom: 1px solid;
+}
+
+
+
+
+
+

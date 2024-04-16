@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+.warp {
+	width: 1060px;
+}
+
+img.upload-Img.bg-cover.cm-bgSize-w100.cm-bgPosition-centerCenter {
+    width: 100%;
+}
+
+
+.pagenation {
+	margin-bottom: 30px;
+}
+
+.nav_sub a, .nav_sub span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.cm-textAlign-center {
+	text-align: center;
+}
+
+.cp-text-coverBox {
+	margin-top: 10px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.cm-textAlign-left {
+	margin-bottom: 15px;
+}
+
+
+.img-img {
+	margin-top: 30px;
+	width: 100%;
+}
+
+
+
+.cp-editBox-text {
+    line-height: 1.7;
+}
+
+
+.cp-from.cc-marginMinus {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	display: flex;
+}
+
+.cp-from li {
+    margin-right: 10px; 
+}
+
+
+.static-tag {
+	margin-bottom: 50px;
+}
+
+
+.cp-tag {
+	display: flex;
+}
+
+.cp-tag li{
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #dcdcdc;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+
+.tagItem {
+    background-color: #f0f0f0;
+    border: 1px solid #dcdcdc;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-top: 20px;
+    margin-right: 5px; /* 태그 사이 간격 */
+    display: inline-block; /* 태그를 인라인 블록으로 표시 */
+    margin-bottom: 5px; /* 줄 바꿈 시 태그 사이 간격 */
+}
+
+/* 상품 구역 */
+
+.goodsRows {
+	margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.goods-unit {
+    flex-basis: calc(33.333% - 10px); /* 한 줄에 3개씩 배치, 간격을 위해 10px를 뺌 */
+    margin-bottom: 20px; /* 아래쪽 마진으로 상품 간 간격 추가 */
+}
+
+.img img {
+    width: 339.29px;
+    height: 407.14px;
+    object-fit: cover; /* 이미지가 잘려 나오지 않도록 비율 유지 */
+}
+
+.info {
+    display: flex; /* Flexbox 레이아웃 사용 */
+    flex-direction: column; /* 요소들을 세로 방향으로 정렬 */
+}
+
+.totalLike svg {
+    padding-top: 6px; /* 이 방법은 SVG 내부 공간에 영향을 줄 수 있으나, 외부 마진에는 영향을 주지 않음 */
+}
+
+
+
+
+
+

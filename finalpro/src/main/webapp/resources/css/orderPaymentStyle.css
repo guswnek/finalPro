@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+}
+
+.title {
+	position: relative;
+}
+
+.title h2 {
+	margin-left: 20px;
+}
+
+.title .titleInfo {
+	position: absolute;
+	right: 20px;
+	top: 25%;
+}
+
+.deliveryInfo {
+	margin-left: 20px;
+}
+
+.deliveryInfo table, .deliveryInfo tr{
+	border : 1px solid #aaaaaa;
+	border-collapse: collapse;
+	width: 98%;
+}
+
+.deliveryInfo td, .deliveryInfo th {
+	padding: 10px;
+}
+
+.deliveryInfo th {
+	text-align: left;
+	font-size: 14px;
+}
+
+.productInfo {
+	margin-left: 20px;
+}
+
+.productInfo table, .productInfo tr{
+	border-collapse: collapse;
+	width: 98%;
+	text-align: center;
+}
+
+.productInfo td, .productInfo th{
+	border : 1px solid #aaaaaa;
+	padding : 8px;
+}
+
+.productInfo .option {
+	color : black;
+	background-color: #efefef;
+	padding: 10px;
+	font-size: 10px;
+	border : 1px solid #c8c8c8;
+	display: block;
+	width : 500px;
+	margin: 7px 10px 7px 10px;
+}
+
+.totalPrice {
+	margin : 40px 50%;
+	position: absolute;
+	left: -100.5px;
+}
+
+.totalPrice input[type=submit]{
+	font-size: 20px;
+	padding: 10px 20px;
+	color: white;
+	background-color: #0078FF;
+	border: none;
+}
+
+.buyInfo{
+	padding : 5px 0 20px 0;
+	font-size: 13px;
+	color: gray;
+	font-weight: bold;
+	margin : 0;
+}
+
+.paymentInfo {
+	margin-left: 20px;
+}
+ 
+.pay_type input[type=radio] {
+	display : none;
+}
+
+.pay_type input[type=radio]+label {
+	display: inline-block;
+	cursor: pointer;
+	height: 24px;
+	width: 90px;
+	border: 1px solid #aaaaaa;
+	border-radius: 3px;
+	text-align: center;
+	padding: 10px;
+	margin: 10px;
+}
+
+.pay_type_title {
+	padding: 0 30px 0 0;
+	text-align: left;
+	font-weight: bold;
+}
+

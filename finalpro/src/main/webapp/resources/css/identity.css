@@ -1,0 +1,94 @@
+@charset "UTF-8";
+ body {
+        font-family: 'Arial', sans-serif;
+        background: #f5f5f5;
+    }
+    .modal {
+        width: 344px;
+        background: #fff;
+        margin: 50px auto;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    .modal-header {
+        font-size: 20px;
+        color: #333;
+        text-align: center;
+        position: relative;
+        padding-bottom: 20px;
+    }
+    .modal-header .close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+    }
+    .input-group {
+        margin-bottom: 15px;
+    }
+    .input-group label {
+        display: block;
+        color: #666;
+        margin-bottom: 5px;
+    }
+    .input-group input[type="text"],
+    .input-group input[type="password"] {
+        width: 97%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .button-group {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .button-group button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        background: #f2f2f2;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+    .button-group button.active {
+        background: #000000;
+        color: #fff;
+    }
+    .button-button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background: #ff5252;
+        color: #fff;
+        cursor: pointer;
+    }
+    
+    .ckbtn{
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background: #000000;
+        color: #fff;
+        cursor: pointer;
+    }
+    .sendbtn{
+        width: 33%;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background: #000000;
+        color: #fff;
+        cursor: pointer;
+        margin-left: 220px;
+    
+    }
+    .footer {
+        text-align: center;
+        font-size: 12px;
+        color: #999;
+        margin-top: 20px;
+    }

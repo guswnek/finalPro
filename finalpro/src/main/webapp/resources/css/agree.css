@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+  .container {
+        width: 300px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-left: 550px;
+    }
+    .header1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .header1 h1 {
+        margin: 0;
+        color: #333;
+        font-size: 24px;
+    }
+    .header1 p {
+        color: #666;
+    }
+    .checklist {
+        list-style: none;
+        padding: 0;
+        margin-left: 17px;
+    }
+    .checklist li {
+        margin-bottom: 20px;
+        color: #939393;
+        font-size: 14px;
+    }
+    .checklist li .agree-all-label {
+        font-size: 14px;
+        font-weight: bold;
+        color:black;
+    }
+    .checklist li .agree-all-input {
+        accent-color: black;
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 2px solid black;
+        border-radius: 50%;
+        background-color: white;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .checklist li input[type="checkbox"]:not(#agree-all) {
+        accent-color: grey;
+    }
+
+    .agree-btn {
+        display: block;
+        width: 80%;
+        padding: 10px;
+        margin: 50px 14px;
+        background: black;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    .footer {
+        text-align: center;
+        font-size: 12px;
+        color: #999;
+    }
+    
+        .warning-message {
+        color: red;
+        display: none;
+        font-size: 12px;
+        text-align: center;
+    }

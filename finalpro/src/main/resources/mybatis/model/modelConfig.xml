@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.spring.finalpro.common.dto.ImageDTO" alias="imageDTO"/>
+		<typeAlias type="com.spring.finalpro.common.dto.ProductDTO2" alias="productDTO2" />
+		
+		
+		
+		<typeAlias type="com.spring.finalpro.post.dto.BrandSnapDTO" alias="brandSnapDTO" />
+		<typeAlias type="com.spring.finalpro.post.dto.MagazineDTO2" alias="magazineDTO2" />
+		
+		
+		<typeAlias type="com.spring.finalpro.member.dto.MemberAddressDTO" alias="memberAddressDTO" />
+		<typeAlias type="com.spring.finalpro.product.dto.SearchDTO" alias="searchDTO"/>
+		
+		
+		<typeAlias type="com.spring.finalpro.member.dto.MemberDTO" alias="memberDTO"/>
+		<typeAlias type="com.spring.finalpro.member.dto.MemberSizeDTO" alias="memberSizeDTO"/>
+		
+		
+		<!-- 마이페이지 -->
+		<typeAlias type="com.spring.finalpro.mypage.dto.MypageDTO" alias = "mypageDTO" />
+		<!-- 프로덕트 -->
+		<typeAlias type="com.spring.finalpro.product.dto.ProductDTO" alias="ProductDTO"/>
+		<typeAlias type="com.spring.finalpro.product.dto.ProductImageDTO" alias="productImageDTO"/>
+		<typeAlias type="com.spring.finalpro.product.dto.ProductInfoImageDTO" alias="productInfoImageDTO"/>
+		<typeAlias type="com.spring.finalpro.product.dto.ProductSizeDTO" alias="productSizeDTO"/>
+		<typeAlias type="com.spring.finalpro.product.dto.ReviewDTO" alias="reviewDTO"/>
+		<typeAlias type="com.spring.finalpro.product.dto.ReviewReplyDTO" alias="reviewReplyDTO"/>
+		<typeAlias type="com.spring.finalpro.product.dto.QuestionDTO" alias="questionDTO"/>
+		<typeAlias type="com.spring.finalpro.product.dto.AnswerDTO" alias="answerDTO"/>
+		
+		
+		
+		
+		<!-- 매거진 -->
+		<typeAlias type="com.spring.finalpro.post.dto.MagazineDTO" alias="magazineDTO"/>      
+        <typeAlias type="com.spring.finalpro.post.dto.MagazineBrandDTO" alias="magazineBrandDTO"/>      
+        <typeAlias type="com.spring.finalpro.post.dto.MagazineProductDTO" alias="magazineProductDTO"/> 
+		
+		
+		
+		<!-- 유진 상품페이지 -->
+		<typeAlias type="com.spring.finalpro.product.dto.Product_totalDTO" alias="product_totalDTO"/>
+		
+		
+	</typeAliases>
+</configuration>

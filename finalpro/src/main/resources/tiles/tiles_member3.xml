@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apach Software Foundation//DTD Tiles Configuration 2.0//En"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+	
+	<tiles-definitions>
+		<definition name="addLayout" template="/WEB-INF/views/common/layout3.jsp">
+			<put-attribute name="title" value=""/>
+			<put-attribute name="body" value=""/>
+		</definition>
+		
+		
+	<definition name="/member/addAddressForm" extends="addLayout">
+			<put-attribute name="title" value="주소추가"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/addAddressForm.jsp"/>
+			</definition>
+		
+			
+	</tiles-definitions>

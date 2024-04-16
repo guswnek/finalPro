@@ -1,0 +1,149 @@
+@charset "UTF-8";
+
+body {
+    font-family: Arial, sans-serif;
+/*     background: #f4f4f4;
+    margin: 0;
+    padding: 20px; */
+}
+ 
+.profile-container {
+    background: #fff;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #3d3d3d;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    color: #555;
+    margin-bottom: 5px;
+    margin-left: 55px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-row input[type="password"],
+.form-row input[type="text"],
+.form-group textarea {
+    width: 77%;
+    padding: 10px;
+    margin-right: -22px; 
+    border: none; 
+    background-color: #dddddd; 
+    color: #333;
+    margin-left: 53px;
+}
+
+.form-group textarea {
+    height: 80px;
+    resize: none;
+}
+
+.profile-form {
+    background: #fff;
+    padding: 20px;
+}
+.form-group button{
+	margin-left:400px;
+	width: 100%;
+    padding: 10px;
+}
+.form-actions button{
+	margin-left:120px;
+	margin-top:15px;
+	height: 35px;
+	width: 100px;
+}
+
+.form-actions input[type=submit]{
+	border:none;
+	background: black;
+	color:white;
+	cursor: pointer;
+	margin-left: 235px;
+	height: 40px;
+	width : 126px;
+	font-size: 18px;
+	margin-top: 10px; 
+	
+	
+}
+
+.delete-button{
+	border-color:red;
+	color: white;
+  cursor: pointer; 
+  background-color: red;
+  border: none;
+}
+
+/* 마우스를 버튼 위에 올렸을 때 더 어두운 빨간색으로 변경 */
+.delete-button:hover {
+  background-color: darkred;
+}
+.form-actions button[type=submit]:hover{
+background-color: #838383;
+
+}
+
+
+.form-row {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.password-container {
+  position: relative;
+  display: flex;
+}
+
+.password-container input[type="password"]
+.password-container input[type="text"]
+
+ {
+  width: 100%;
+  padding-right: 100px; /* make room for the button */
+}
+
+
+
+.password-toggle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 90%;
+  border: none;
+  background: #dddddd;
+  color: #878787;
+  cursor: pointer;
+  margin-top: 2px;
+  margin-right: 65px;
+}
+
+.password-toggle:focus {
+  outline: none;
+}
+.form-row label{
+	display: block;
+	color: #555;
+		margin-bottom: 5px;
+	margin-left: 53px;
+
+}

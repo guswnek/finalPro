@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    text-align: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+}
+
+.password-reset-container {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 370px;
+    margin-left: 550px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.password-reset-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.password-reset-form .form-group {
+    margin-bottom: 15px;
+}
+
+.password-reset-form .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Makes sure padding doesn't affect the overall width */
+}
+
+.password-reset-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #000000;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.password-reset-form button:hover {
+    background: #9d9a9a;
+}
+
+
+
+.links a {
+    color: #b7b4b4;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.links {
+    margin-top: 20px;
+}

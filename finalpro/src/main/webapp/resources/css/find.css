@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+*{
+    box-sizing: border-box;
+    outline: none; 
+}
+
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:14px;
+    background-color:#f4f4f4;
+    line-height: 3.5em;
+    color : #222;
+    margin: 0;
+}
+
+.member{
+    width: 400px;
+    margin: auto; 
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+
+.member .layout{
+    margin :5px 0; 
+}
+
+.member b{
+    display: block; 
+    margin-bottom: 5px;
+}
+
+.member input,.member select{
+    border: 1px solid #e6e6e6;
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.member input[type=button],
+.member input[type=submit]{
+background-color: #CECEF6;
+color:#fff
+}
+
+.btn-content  input[type=button]{
+    background-color: #FFFFFF;
+    color: #1C1C1C;
+    border: 1px solid #e6e6e6;
+}
+
+.btn-content  input{
+	   padding: 10px 0; 
+	    width: 145px;
+}
+
+.member input[type=button]:hover,
+.member input[type=submit]:hover{
+background-color: #e6e6e6;
+}
+
+.member input:focus, .member select:focus{
+    border: 1px solid  #282828;
+}
+.btn-content {
+    display: flex;
+    justify-content: center; 
+    gap: 6px; 
+    margin-top: 30px;
+}
+  .btn {
+    font-size: 14px; 
+    margin: -3px;
+    display: inline-block; 
+    text-align: center; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    margin-top: 23px;
+  }
+  .btn-id:hover {
+    background-color: #a4a1a8;
+  }
+
+  .btn-pw:hover {
+    background-color: #a4a1a8;
+  }

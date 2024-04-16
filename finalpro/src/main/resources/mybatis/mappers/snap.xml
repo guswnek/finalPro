@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.snap">
+	<resultMap type="imageDTO" id="imgResult">
+		<result property="no" column="no"/>
+		<result property="imageFileName" column="imageFileName" />
+		<result property="regDate" column="regDate" />
+		<result property="brand" column="brand" />
+		<result property="productNo" column="productNo" />
+		<result property="magazineNo" column="magazineNo" />
+		<result property="title" column="title" />
+		<result property="subTitle" column="subTitle" />
+		<result property="content" column="content" />
+		<result property="imageNumber" column="imageNumber" />
+	</resultMap>
+	
+	<resultMap type="productDTO2" id="proResult">
+		<result property="No" column="No" />
+		<result property="parentProductNo" column="ParentProductNo" />
+		<result property="name" column="name" />
+		<result property="brand" column="brand" />
+		<result property="brandEng" column="brandEng" />
+		<result property="gender" column="gender" />
+		<result property="price" column="price" />
+		<result property="category" column="category" />
+		<result property="subCategory" column="subCategory" />
+		<result property="viewCount" column="viewCount" />
+		<result property="likeCount" column="likeCount" />
+		<result property="color1" column="color1" />
+		<result property="color2" column="color2" />
+		<result property="color3" column="color3" />
+		<result property="materiall" column="materiall" />
+		<result property="starScore" column="starScore" />
+		<result property="red" column="red" />
+		<result property="green" column="green" />
+		<result property="blue" column="blue" />
+		<result property="distance" column="distance" />
+		
+	</resultMap>
+	
+	<resultMap type="brandSnapDTO" id="brandResult">
+		<result property="snapNo" column="snapNo" />
+		<result property="brand" column="brand" />
+		<result property="color" column="color" />
+		<result property="name" column="name" />
+		<result property="job" column="job" />
+		<result property="height" column="height" />
+		<result property="weight" column="weight" />
+		<result property="viewCount" column="viewCount" />
+		<result property="productNo" column="productNo" />
+		<result property="tag" column="tag" />
+	</resultMap>
+	
+	
+	
+	<!-- 스타일 탭에서 해당 스냅샷 클릭하면 해당 정보 가져오기  -->
+	
+	<select id="selectOneBrandSnap" resultType="brandSnapDTO" parameterType="String">
+		<![CDATA[
+			SELECT s.*, COUNT(v.snapNo) AS viewCount
+			FROM snap_tbl s
+			LEFT JOIN view_history v ON s.snapNo = v.snapNo
+			WHERE s.snapNo = #{snapNo}
+			GROUP BY s.snapNo, s.street, s.brand, s.name, s.price, s.job, s.height, s.weight, s.productNo, s.productName
+		]]>
+	</select>
+
+	
+	<select id="selectImageFileList4" resultMap="imgResult">
+		<![CDATA[
+			select * from snap_image_tbl where snapNo=#{snapNo} ORDER BY no ASC
+		]]>
+	</select>
+	
+	<!-- 스타일 탭에서 해당 스냅샷 클릭하면 해당 스냅샷 제품의 태그 가져오기 -->
+	
+	<select id="brandSnapTag" resultType="brandSnapDTO" parameterType="String">
+		<![CDATA[
+			select * from related_tag_tbl where snapNo = #{snapNo}
+
+		]]>
+	</select>
+	
+	
+	<!-- 브랜드 스냅샷 1개 클릭했을 때 그 사람이 입은 상품과 색상이 다른 것 정보-->
+	
+	<select id="brandSnapProductList" resultType="productDTO2" parameterType="String">
+		<![CDATA[
+			SELECT 
+			    pb.productNo, 
+			    pb.name, 
+			    pb.brand, 
+			    pb.price,
+			    (SELECT AVG(starScore) 
+			     FROM review_tbl 
+			     WHERE productNo = pb.productNo) AS averageStarScore,
+			    (SELECT COUNT(*) 
+			     FROM review_tbl 
+			     WHERE productNo = pb.productNo) AS reviewCount, -- 여기에 추가된 부분
+			    (SELECT COUNT(*) 
+			     FROM view_history 
+			     WHERE productNo = pb.productNo) AS viewCount,
+			    (SELECT COUNT(*) 
+			     FROM product_like_bascket_tbl 
+			     WHERE productNo = pb.productNo AND inLike = 1) AS likeCount
+			FROM 
+			    product_base_tbl pb
+			WHERE 
+			    pb.productNo IN (
+			        SELECT productNo
+			        FROM related_product_tbl
+			        WHERE snapNo = #{snapNo}
+			    )
+			OR 
+			    pb.parentProductNo IN (
+			        SELECT productNo
+			        FROM related_product_tbl
+			        WHERE snapNo = #{snapNo}
+			    )
+
+		]]>
+	</select>
+	
+	<select id="brandSnapProductImage" resultMap="imgResult" parameterType="String">
+		<![CDATA[
+			SELECT p.*, i.* 
+			FROM product_image_tbl i
+			JOIN product_base_tbl p ON i.productNo = p.productNo
+			WHERE (p.productNo IN (
+			        SELECT productNo
+			        FROM related_product_tbl
+			        WHERE snapNo = #{snapNo}
+			    )
+			    OR p.parentProductNo IN (
+			        SELECT productNo
+			        FROM related_product_tbl
+			        WHERE snapNo = #{snapNo}
+			    ))
+			AND i.imageFileName = '1.jpg'
+		]]>
+	</select>
+	
+	
+	
+	<!-- 브랜드 스냅샷 상세페이지에서 관련 브랜드 정보, 사진 가져오기 -->
+	
+	<select id="brandList" resultType="brandSnapDTO" parameterType="String">
+		<![CDATA[
+			SELECT s.*, COUNT(v.snapNo) AS viewCount
+			FROM snap_tbl s
+			LEFT JOIN view_history v ON s.snapNo = v.snapNo
+			WHERE s.brand = #{brand}
+			GROUP BY s.snapNo, s.street, s.brand, s.name, s.price, s.job, s.height, s.weight, s.productNo, s.productName
+		]]>
+	</select>
+	
+	<select id="brandImageList" resultMap="imgResult" parameterType="String">
+		<![CDATA[
+			SELECT base.snapNo, img.imageFileName
+			FROM snap_tbl base
+			JOIN snap_image_tbl img ON base.snapNo = img.snapNo
+			WHERE img.imageFileName = '1.jpg'
+			  AND base.brand = #{brand}
+		]]>
+	</select>
+	
+
+
+	
+	
+	
+	<!-- 메인페이지에서 브랜드 스냅을 클릭하고 전체를 눌렀을 때 브랜드 스냅 전체 정보 가져오기 -->
+	
+	<select id="allBrandSnapList" resultType="brandSnapDTO" >
+		<![CDATA[
+			SELECT s.*, COUNT(v.snapNo) AS viewCount
+			FROM snap_tbl s
+			LEFT JOIN view_history v ON s.snapNo = v.snapNo
+			WHERE s.street is null
+			GROUP BY s.snapNo, s.street, s.brand, s.name, s.price, s.job, s.height, s.weight, s.productNo, s.productName
+		]]>
+	</select>
+	
+	<select id="allBrandSnapImageList" resultMap="imgResult" >
+		<![CDATA[
+			SELECT base.snapNo, img.imageFileName
+			FROM snap_tbl base
+			JOIN snap_image_tbl img ON base.snapNo = img.snapNo
+			WHERE img.imageFileName = '1.jpg'
+			  AND base.street IS NULL
+		]]>
+	</select>
+	
+	<!-- 메인페이지에서 스트릿 스냅을 클릭하고 전체를 눌렀을 때 스트릿 스냅 전체 정보 가져오기 -->
+	
+	<select id="allStreetSnapList" resultType="brandSnapDTO" >
+		<![CDATA[
+			SELECT s.*, COUNT(v.snapNo) AS viewCount
+			FROM snap_tbl s
+			LEFT JOIN view_history v ON s.snapNo = v.snapNo
+			WHERE s.street is not null
+			GROUP BY s.snapNo, s.street, s.brand, s.name, s.price, s.job, s.height, s.weight, s.productNo, s.productName
+		]]>
+	</select>
+	
+	<select id="allStreetSnapImageList" resultMap="imgResult" >
+		<![CDATA[
+			SELECT base.snapNo, img.imageFileName
+			FROM snap_tbl base
+			JOIN snap_image_tbl img ON base.snapNo = img.snapNo
+			WHERE img.imageFileName = '1.jpg'
+			  AND base.street IS NOT NULL
+		]]>
+	</select>
+	
+	<select id="brandImage" resultMap="imgResult" parameterType="String">
+		<![CDATA[
+			select * from brand_tbl where brand = #{brand}
+		]]>
+	</select>
+	
+	
+	<!-- 스냅 조회수 올리기 -->
+	<insert id="addViewSnap" parameterType="map">
+        INSERT INTO view_history (viewNo, memberId, snapNo, viewDate)
+        VALUES (
+            (SELECT COALESCE(MAX(viewNo), 0) + 1 FROM view_history),
+            #{loginId},
+            #{snapNo},
+            CURRENT_DATE
+        )
+    </insert>
+    
+    <insert id="addViewSnap2">
+        INSERT INTO view_history (viewNo, snapNo, viewDate)
+        VALUES (
+            (SELECT COALESCE(MAX(viewNo), 0) + 1 FROM view_history),
+            #{value},
+            CURRENT_DATE
+        )
+    </insert>
+	
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="mypageLayout" template="/WEB-INF/views/mypage/common/mypageMain.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value = "/WEB-INF/views/mypage/common/header.jsp" />
+		<put-attribute name="side" value = "/WEB-INF/views/mypage/common/side.jsp" />
+		<put-attribute name="body" value = "" />
+		<put-attribute name="footer" value = "/WEB-INF/views/common/footer.jsp" />
+	</definition>
+   
+   <!-- 구매내역 이동 -->
+   <definition name="/mypage/orderList" extends="mainLayout">
+      <put-attribute name="title" value="마이페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/mypage/orderList.jsp" />
+   </definition>
+   
+   <!-- 장바구니 이동 -->
+   <definition name="/mypage/shoppingBasket" extends="baseLayout">
+      <put-attribute name="header" value = "/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="side" value = "/WEB-INF/views/common/side.jsp" />
+      <put-attribute name="title" value="장바구니" />
+      <put-attribute name="body" value="/WEB-INF/views/mypage/shoppingBasket.jsp" />
+   </definition>
+   
+   <!-- 좋아요 이동 -->
+   <definition name="/mypage/like" extends="mainLayout">
+      <put-attribute name="title" value = "좋아요" />
+      <put-attribute name="body" value = "/WEB-INF/views/mypage/like.jsp" />
+   </definition>
+   
+   <!-- 최근목록으로 이동 -->
+   <definition name="/mypage/recentProduct" extends="mainLayout">
+      <put-attribute name="title" value="최근 본 상품" />
+      <put-attribute name="body" value="/WEB-INF/views/mypage/recentProduct.jsp" />
+   </definition>
+   
+   <!-- 주문서 작성 이동 : 장바구니 -> 주문서 -->
+   <definition name="/mypage/recepit" extends = "baseLayout">
+      <put-attribute name="header" value = "/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="side" value = "/WEB-INF/views/common/side.jsp" />
+      <put-attribute name="title" value="주문서 작성" />
+      <put-attribute name="body" value="/WEB-INF/views/mypage/orderPayment.jsp" />
+   </definition>
+   
+   <!-- 주문서 작성 이동 : 상품 바로구매 -> 주문서 -->
+   <definition name="/mypage/recepit1" extends = "baseLayout">
+      <put-attribute name="header" value = "/WEB-INF/views/common/header.jsp" />
+      <put-attribute name="side" value = "/WEB-INF/views/common/side.jsp" />
+      <put-attribute name="title" value="주문서 작성" />
+      <put-attribute name="body" value="/WEB-INF/views/mypage/orderPayment1.jsp" />
+   </definition>
+   
+   <definition name="/mypage/productPage" extends="baseLayout">
+      <put-attribute name="title" value="상품 페이지" />
+      <put-attribute name="body" value="/WEB-INF/views/mypage/productPage.jsp" />
+   </definition>
+	
+</tiles-definitions>

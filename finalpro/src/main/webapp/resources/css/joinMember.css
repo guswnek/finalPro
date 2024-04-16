@@ -1,0 +1,175 @@
+@charset "UTF-8";
+*{
+    box-sizing: border-box;
+    outline: none; 
+}
+
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:14px;
+    background-color:#f4f4f4;
+    line-height: 1.5em;
+    color : #222;
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: #222;
+}
+
+ .member{
+    width: 400px;
+    margin: auto; 
+    padding: 0 20px;
+    margin-bottom: 20px;
+} 
+
+.member .logo{
+    display: block;
+    margin :50px auto;
+    width: 150px;
+}
+
+.member .layout{
+    margin :16px 0; 
+}
+
+.member b{
+    display: block; 
+    margin-bottom: 5px;
+}
+
+.member input,.member select{
+    border: 1px solid #e6e6e6;
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.member input[type=button],
+.member input[type=submit]{
+background-color: #151515;
+color:#fff
+}
+
+.member input[type=button]:hover,
+.member input[type=submit]:hover{
+background-color: #6E6E6E;
+}
+
+.member input:focus, .member select:focus{
+    border: 1px solid  #282828;
+}
+
+
+
+.layout.go-id div {
+    display: flex;
+}
+
+.layout.go-id div input:nth-child(1){
+    flex:2;
+}
+
+.layout.tel-number div input:nth-child(2){
+    flex:1;
+}
+
+.pw{
+    background-size: 20px;
+    background-color: #fff;
+}
+
+ .layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+} 
+
+
+
+
+.layout input[type="text"],
+.layout input[type="password"],
+.layout input[type="email"],
+.layout input[type="tel"] {
+    flex-grow: 1;
+    margin: 4px 0px;
+    height: 42px; /* 입력 필드의 높이를 조정하세요 */
+}
+
+.check-btn {
+    height: 36px; /* 중복체크 버튼의 높이를 입력 필드와 일치시킴 */
+    padding: 0 15px; /* 버튼 내부의 좌우 패딩 */
+}
+
+label {
+    min-width: 70px; /* 라벨의 최소 너비 */
+}
+
+.gender-layout input[type="radio"] {
+    margin-left: 10px; /* 성별 라디오 버튼 간격 */
+}
+.layout label {
+  min-width: 80px; /* 라벨의 너비 설정 */
+}
+
+.layout.birth input,
+.layout.tel-number input {
+  flex: 1; /* 생년월일과 전화번호 입력 필드의 flex 비율을 1로 설정 */
+}
+
+.layout .id, .layout .pw, .layout input[type="text"], .layout input[type="email"], .layout input[type="tel"] {
+  flex: 1; /* 입력 필드가 차지하는 공간을 동일하게 설정 */
+  margin-right: 0px; /* 오른쪽 여백 조절 */
+}
+
+.layout .idck {
+  height: 43px; /* 버튼의 높이를 입력 필드와 동일하게 설정 */
+  border: 1px solid #ddd; /* 테두리 스타일 설정 */
+  background-color: #f8f8f8; /* 버튼 배경색 설정 */
+  cursor: pointer; /* 마우스 오버 시 커서 변경 */
+  width: 94px;
+  vertical-align: middle; 
+  line-height: 10px;
+  margin-bottom: 1px;
+}
+
+.gender {
+  justify-content: flex-start; /* 성별 선택 부분 가운데 정렬 */
+}
+
+.gender label {
+  margin: 0 10px; /* 라벨 사이의 여백 조절 */
+}
+
+.tel-number input[type="tel"]{
+  flex: 1;
+  margin-right: 78px; /* 전화번호와 생년월일 입력란의 너비를 동일하게 설정 */
+}
+.birth input[type="text"] {
+	flex: 1;
+  margin-right: 9px;
+
+	}
+	
+	.layout.birth {
+  margin-left: 0; /* 왼쪽 여백 제거 */
+}
+
+/* 생년월일 입력 필드가 다른 필드와 라인을 맞추도록 조정 */
+.layout.birth div input {
+  flex-grow: 1; /* 필드가 사용 가능한 공간을 모두 차지하도록 함 */
+  margin: 4px 0px; /* 위 아래 마진을 다른 필드와 일치시킴 */
+  height: 42px; /* 다른 텍스트 입력 필드와 동일한 높이 설정 */
+  width: 279px; /* 너비를 자동으로 조정하여 패딩과 보더를 고려함 */
+}
+
+.id{
+	font-size: 12px;
+	font-weight: normal;
+}
+
+
