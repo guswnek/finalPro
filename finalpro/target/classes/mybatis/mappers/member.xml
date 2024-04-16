@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+	<resultMap type="memberDTO" id="memResult">
+		<result property="id" column="id" />
+		<result property="pwd" column="pwd" />
+		<result property="name" column="name" />
+		<result property="birthdate" column="birthdate" />
+		<result property="email" column="email" />
+		<result property="phone" column="phone" />
+		<result property="no" column="no" />
+		<result property="height" column="height"/>
+		<result property="weight" column="weight"/>
+		<result property="personalColor" column="personalColor"/>
+		<result property="gender" column="gender"/>
+		<result property="memberId" column="memberId" />
+		<result property="addressName" column="addressName" />
+		<result property="recipient" column="recipient" />
+		<result property="addressPhone" column="addressPhone" />
+		<result property="postCode" column="postCode" />
+		<result property="address" column="address" />
+		<result property="detailAddress" column="detailAddress" />
+		<result property="regdate" column="regdate" /> 
+	</resultMap>
+	
+	 <resultMap id="addressResult" type="memberAddressDTO">
+	 	<result property="no" column="no"/>
+	 	<result property="memberId" column="memberId" />
+        <result property="addressName" column="addressName" />
+        <result property="recipient" column="recipient" />
+        <result property="addressPhone" column="addressPhone" />
+        <result property="postCode" column="postCode" />
+        <result property="address" column="address" />
+        <result property="detailAddress" column="detailAddress" />
+        <result property="regdate" column="regdate" />
+    </resultMap>
+    
+    	 <resultMap id="sizeResult" type="memberSizeDTO">
+	 	<result property="sizeNO" column="sizeNO"/>
+	 	<result property="memberId" column="memberId" />
+        <result property="sizeCategory" column="sizeCategory" />
+        <result property="topTotalLength" column="topTotalLength" />
+        <result property="shoulderLength" column="shoulderLength" />
+        <result property="chestCrossLength" column="chestCrossLength" />
+        <result property="sleevelength" column="sleevelength" />
+        <result property="pantsTotalLength" column="pantsTotalLength" />
+        <result property="waistCrossLength" column="waistCrossLength" />
+        <result property="hipCrossLength" column="hipCrossLength" />
+        <result property="thighCrossLength" column="thighCrossLength" />
+        <result property="riseLength" column="riseLength" />
+        <result property="hemCrossLength" column="hemCrossLength" />
+        <result property="footLength" column="footLength" />
+        <result property="ballOfFoot" column="ballOfFoot" />
+        <result property="ankleHeight" column="ankleHeight" />
+        <result property="instepHeight" column="instepHeight" />
+        <result property="regdate" column="regdate" />
+    </resultMap>
+
+<!-- 회원가입 -->
+<insert id="addMember" parameterType="memberDTO">
+	<![CDATA[
+		insert into member_base_tbl (id, pwd, name, birthdate ,email, phone, gender, regdate) values (#{id}, #{pwd}, #{name},#{birthdate}, #{email}, #{phone}, #{gender},sysdate)
+	]]>
+</insert>
+<!-- 주소 추가 -->
+<insert id="addAddress" parameterType="memberAddressDTO" >
+    <![CDATA[
+    INSERT INTO member_address_tbl (no,memberId, addressName, recipient, addressPhone, postCode, address, detailAddress, regdate)
+    VALUES (member_address_seq.NEXTVAL,#{memberId}, #{addressName}, #{recipient}, #{addressPhone}, #{postCode}, #{address}, #{detailAddress},sysdate)
+    ]]>
+</insert>
+<!-- 로그인 -->
+<select id="login" resultType="memberDTO" parameterType="memberDTO">
+		<![CDATA[
+			select * from member_base_tbl where id = #{id} and pwd = #{pwd}
+		]]>
+	</select>
+	
+<!-- 회원정보 표기 -->
+<select id="Selectmember" resultType="memberDTO" parameterType="String">
+<![CDATA[
+SELECT * FROM member_base_tbl WHERE id = #{id}
+]]>
+</select>
+  <select id="SelectmemberAddress" resultType="memberAddressDTO" parameterType="String">
+<![CDATA[
+ SELECT address, detailAddress FROM member_address_tbl WHERE memberId = #{id}
+]]>
+</select>  
+
+<!-- 나의 사이즈 -->
+<select id="mySize" resultType="memberDTO" parameterType="String">
+<![CDATA[
+ SELECT id, height, weight, personalColor FROM member_base_tbl WHERE id = #{id}
+]]>
+</select>  
+
+<select id="infoSizeRecommend" resultType="memberSizeDTO" parameterType="map">
+<![CDATA[
+ SELECT * FROM member_size_tbl WHERE memberId = #{memberId} and sizeCategory = #{sizeCategory}
+]]>
+</select>  
+
+<!-- 기본 회원수정 창 -->
+<select id="memberDetailForm" resultType="memberDTO" parameterType="String">
+<![CDATA[
+SELECT * FROM member_base_tbl WHERE id = #{id}
+]]>
+</select>
+
+<select id="myPage" resultType="memberDTO" parameterType="String">
+<![CDATA[
+SELECT * FROM member_base_tbl WHERE id = #{id}
+]]>
+</select>
+
+<!-- 주소 창 -->
+<select id="addressDetailForm" resultType="memberAddressDTO" parameterType="String">
+<![CDATA[
+ SELECT no, addressName, addressPhone, recipient, postCode, address, detailAddress FROM member_address_tbl WHERE memberId = #{memberId}
+]]>
+</select>
+
+
+<!-- 기본 회원정보 수정 -->
+ <update id="modMember" parameterType="memberDTO">
+	<![CDATA[
+	
+		UPDATE member_base_tbl SET
+   			pwd = #{pwd},
+   			name = #{name},
+            birthdate = #{birthdate},
+            email = #{email},
+            phone = #{phone},
+            gender = #{gender}
+        WHERE id = #{id}   
+    ]]>
+
+</update>
+<!--  주소 회원정보 수정 -->
+ <update id="updateAddress" parameterType="memberAddressDTO">
+    <![CDATA[
+        UPDATE member_address_tbl SET
+        addressName = #{addressName},
+        recipient = #{recipient},
+        addressPhone = #{addressPhone},
+        postCode = #{postCode,jdbcType=INTEGER},
+        address = #{address},
+        detailAddress = #{detailAddress}
+        WHERE no = #{no}
+    ]]>
+</update>  
+ 
+ <!-- 나의 사이즈 -->
+ <update id="updateMySize" parameterType="memberDTO">
+    <![CDATA[
+        UPDATE member_base_tbl SET
+       		height = #{height},
+       		weight = #{weight},
+       		personalColor = #{personalColor}
+        WHERE id = #{id}
+    ]]>
+</update>  
+
+
+<delete id="delMemberAddress" parameterType="String">
+		<![CDATA[
+		 DELETE FROM member_address_tbl WHERE memberId = #{id}
+		]]>
+</delete> 
+
+<delete id="delMemberSize" parameterType="String">
+		<![CDATA[
+		 DELETE FROM member_size_tbl WHERE memberId = #{id}
+		]]>
+</delete> 
+
+<delete id="delMember" parameterType="String">
+		<![CDATA[
+	 DELETE FROM member_base_tbl WHERE id = #{id}
+		]]>
+</delete> 
+
+
+
+
+<!-- 아이디 찾기 -->
+<select id="searchId" resultType="string" parameterType="map">
+		<![CDATA[
+			SELECT id
+			FROM member_base_tbl
+			WHERE name = #{name} and email=#{email}
+		]]>
+</select>
+
+<!-- 비밀번호 찾기 -->
+<select id="searchPw" resultType="string" parameterType="map">
+		<![CDATA[
+			SELECT pwd
+			FROM member_base_tbl
+			WHERE id =#{id} and name = #{name} and email=#{email} 
+		]]>
+</select>
+
+<!-- 아이디 중복검사 -->
+<select id="ckId" resultType="int" parameterType="String">
+		<![CDATA[
+			SELECT count (*) FROM member_base_tbl
+			WHERE id =#{id} 
+		]]>
+</select>
+
+<!-- 아이디 중복검사 -->
+<select id="ckEmail" resultType="int" parameterType="String">
+		<![CDATA[
+			SELECT count (*) FROM member_base_tbl
+			WHERE email =#{email} 
+		]]>
+</select>
+
+<!-- 새로운 비밀번호  -->
+ <update id="newModPwd"  parameterType="map">
+	<![CDATA[
+	
+	UPDATE member_base_tbl
+    SET pwd = #{pwd}
+    WHERE id = #{id}
+    ]]>
+
+</update>
+<!-- 주소 추가시 3개 이상 못넣게 -->
+<select id="AddressCount" resultType="int">
+	<![CDATA[
+	SELECT COUNT(*) FROM member_address_tbl WHERE memberId = #{memberId}
+	]]>
+</select>
+
+<!-- 주소삭제 -->
+<delete id="delAddress" parameterType="String">
+		<![CDATA[
+	DELETE FROM member_address_tbl
+    WHERE no = #{no}
+		]]>
+</delete>
+
+
+
+<!-- 카테고리당 사이즈 정보 -->
+<select id="checkSize" resultType="int" parameterType="memberSizeDTO">
+<![CDATA[
+ SELECT COUNT(*) FROM member_size_tbl WHERE memberId = #{memberId} and sizeCategory = #{sizeCategory}
+]]>
+</select>  
+
+
+<update id="updateRecommend" parameterType="memberSizeDTO">
+    <![CDATA[
+        UPDATE member_size_tbl
+    SET
+    	sizeCategory = #{sizeCategory},
+        topTotalLength = #{topTotalLength},
+        shoulderLength = #{shoulderLength},
+        chestCrossLength = #{chestCrossLength},
+        sleevelength = #{sleevelength},
+        pantsTotalLength = #{pantsTotalLength},
+        waistCrossLength = #{waistCrossLength},
+        hipCrossLength = #{hipCrossLength},
+        thighCrossLength = #{thighCrossLength},
+        riseLength = #{riseLength},
+        hemCrossLength = #{hemCrossLength},
+        footLength = #{footLength},
+        ballOfFoot = #{ballOfFoot},
+        ankleHeight = #{ankleHeight},
+        instepHeight = #{instepHeight}
+    WHERE memberId = #{memberId}
+      AND sizeCategory = #{sizeCategory}
+    ]]>
+</update>
+
+<insert id="insertRecommend" parameterType="memberSizeDTO">
+    <![CDATA[
+		INSERT INTO member_size_tbl (sizeNo, memberId, sizeCategory, topTotalLength, shoulderLength, chestCrossLength, sleevelength, pantsTotalLength, waistCrossLength, hipCrossLength, thighCrossLength, riseLength, hemCrossLength, footLength, ballOfFoot, ankleHeight, instepHeight, regDate)
+VALUES (member_size_seq.NEXTVAL,#{memberId},#{sizeCategory},#{topTotalLength},#{shoulderLength},#{chestCrossLength},#{sleevelength},#{pantsTotalLength},#{waistCrossLength},#{hipCrossLength},#{thighCrossLength},#{riseLength},#{hemCrossLength},#{footLength},#{ballOfFoot},#{ankleHeight},#{instepHeight},SYSDATE)
+    ]]>
+</insert> 
+<!-- 사이즈 추천 부분 끝 -->
+
+
+	<select id="getProductSize" resultType="memberSizeDTO" parameterType="productSizeDTO">
+      select * from product_size_tbl where productNo=#{productNo} and productsize=#{productSize}
+   </select>  
+
+</mapper>

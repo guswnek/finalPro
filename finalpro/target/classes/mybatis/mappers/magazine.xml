@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.magazine">
+	<resultMap type="magazineBrandDTO" id="magazineBrand">
+		<result property="brand" column="brand" />
+		<result property="brandEng" column="brandEng" />
+	    <result property="magazineCount" column="magazineCount" />
+	 </resultMap>
+	 
+	 <resultMap type="magazineDTO" id="magazine">
+		<result property="magazineNo" column="magazineNo" />
+		<result property="category" column="category" />
+	    <result property="brand" column="brand" />
+	    <result property="season" column="season" />
+		<result property="title" column="title" />
+	    <result property="subTitle" column="subTitle" />
+	    <result property="content" column="content" />
+		<result property="staff" column="staff" />
+		<result property="imageNumber" column="imageNumber" />
+	    <result property="regdate" column="regdate" />
+	 </resultMap>
+	 
+	 <resultMap type="magazineProductDTO" id="magazineProduct">
+		<result property="productNo" column="productNo" />
+		<result property="brand" column="brand" />
+	    <result property="name" column="name" />
+	    <result property="price" column="price" />
+	    <result property="totalLikes" column="totalLikes" />
+	 </resultMap>
+	 
+	 
+	 <resultMap type="imageDTO" id="imgResult">
+		<result property="no" column="no"/>
+		<result property="imageFileName" column="imageFileName" />
+		<result property="regDate" column="regDate" />
+		<result property="brand" column="brand" />
+		<result property="productNo" column="productNo" />
+		<result property="magazineNo" column="magazineNo" />
+		<result property="title" column="title" />
+		<result property="subTitle" column="subTitle" />
+		<result property="content" column="content" />
+		<result property="imageNumber" column="imageNumber" />
+	</resultMap>
+
+	<select id="listBrand" parameterType="java.util.Map" resultMap="magazineBrand">
+	    SELECT 
+	        brand,
+	        brandEng, 
+	        COUNT(*) AS magazineCount 
+	    FROM 
+	        magazine_tbl
+	    WHERE 
+	        category = #{kindOfMagazine}
+	        <if test="firstLetter != null and firstLetter != ''">
+	            AND (
+	                UPPER(brandEng) LIKE CONCAT(UPPER(#{firstLetter}), '%') OR
+	                UPPER(brand) LIKE CONCAT(UPPER(#{firstLetter}), '%')
+	            )
+	        </if>
+	    GROUP BY 
+	        brand, brandEng
+	</select>
+	
+	<select id="getMagazine" parameterType="java.util.Map" resultType="MagazineDTO">
+		select * from magazine_tbl where magazineNo=#{magazineNo} and category=#{category}
+	</select>
+	
+	<select id="listTags" parameterType="int" resultType="String">
+		select tag from related_tag_tbl where magazineno=#{magazineNo}
+	</select>
+	
+	<select id="listMagazineProducts" parameterType="int" resultMap="magazineProduct">
+		SELECT
+		    pbt.productNo,
+		    pbt.brand,
+		    pbt.name,
+		    pbt.price,
+		    nvl(SUM(CASE WHEN pltb.inLike = 1 THEN 1 ELSE 0 END), 0) AS totalLikes
+		FROM
+		    product_base_tbl pbt
+		    
+		JOIN
+		    related_product_tbl mrpt ON mrpt.productNo = pbt.productNo
+		LEFT JOIN
+		    product_like_bascket_tbl pltb ON pbt.productNo = pltb.productNo
+		WHERE
+		    mrpt.magazineNo = #{magazineNo}
+		GROUP BY
+		    pbt.productNo, pbt.brand, pbt.name, pbt.price
+	</select>
+	
+	
+	
+	<!-- 화보 리스트 페이지에 정보 전달 -->
+	<select id="selectpictorialAllList" resultMap="imgResult">
+		<![CDATA[
+			SELECT magazineNo, brand, title, subTitle, imageNumber
+			FROM magazine_tbl
+			WHERE category = 'pictorial'
+			ORDER BY magazineNo DESC
+		]]>
+	</select>
+	
+	
+	
+	<!-- 룩북 리스트 페이지에 정보 전달 -->
+	<select id="selectlookbookAllList" resultMap="imgResult">
+		<![CDATA[
+			SELECT magazineNo, brand, title, subTitle, imageNumber
+			FROM magazine_tbl
+			WHERE category = 'lookbook'
+			ORDER BY magazineNo DESC
+		]]>
+	</select>
+	
+	
+	<!-- 화보 리스트 페이지에 들어온 브랜드에 해당하는 정보 전달 -->
+	<select id="selectpictorialBrandAllList" parameterType="String" resultMap="imgResult">
+	    <![CDATA[
+	        SELECT magazineNo, brand, title, subTitle, imageNumber
+	        FROM magazine_tbl
+	        WHERE category = 'pictorial'
+	        AND brand = #{brand}
+	    ]]>
+	    
+	</select>
+	
+	<!-- 룩북 리스트 페이지에 들어온 브랜드에 해당하는 정보 전달 -->
+	<select id="selectlookbookBrandAllList" parameterType="String" resultMap="imgResult">
+	    <![CDATA[
+	        SELECT magazineNo, brand, title, subTitle, imageNumber
+	        FROM magazine_tbl
+	        WHERE category = 'lookbook'
+	        AND brand = #{brand}
+	    ]]>
+	</select>
+
+
+	
+	
+	
+</mapper>

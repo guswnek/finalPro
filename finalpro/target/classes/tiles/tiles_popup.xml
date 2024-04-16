@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="popupLayout" template="/WEB-INF/views/popup/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body" value = "" />
+	</definition>
+	
+	<!-- 팝업 창 열기(배송 정보) -->
+	<definition name="/popup/orderInfo" extends="popupLayout">
+		<put-attribute name="title" value="배송 정보" />
+		<put-attribute name="body" value="/WEB-INF/views/popup/orderInfo.jsp" />
+	</definition>
+	
+	<!-- 리뷰 폼 -->
+	<definition name="/product/reviewForm" extends = "popupLayout">
+		<put-attribute name="title" value="리뷰 폼" />
+		<put-attribute name="body" value="/WEB-INF/views/review/reviewForm.jsp" />
+	</definition>
+	
+	<!-- 리뷰 수정 폼 -->
+	<definition name="/product/modifyReviewForm" extends = "popupLayout">
+		<put-attribute name="title" value="리뷰 폼" />
+		<put-attribute name="body" value="/WEB-INF/views/review/modifyReviewForm.jsp" />
+	</definition>
+	
+	
+	<definition name="/popup/question_form" extends = "popupLayout">
+      <put-attribute name="title" value="q&amp;a" />
+      <put-attribute name="body" value="/WEB-INF/views/popup/question_form.jsp"/>
+   </definition>
+	
+</tiles-definitions>

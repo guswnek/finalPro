@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.product">
+	<resultMap type="productDTO" id="proBase">
+		<result property="productNo" column="productNo" />
+		<result property="parentProductNo" column="parentProductNo" />
+		<result property="name" column="name" />
+		<result property="brand" column="brand" />
+		<result property="brandEng" column="brandEng" />
+		<result property="gender" column="gender" />
+		<result property="price" column="price" />
+		<result property="category" column="category" />
+		<result property="subCategory" column="subCategory" />
+		<result property="regDate" column="regDate" />
+		<result property="viewCount" column="viewCount" />
+		<result property="likeCount" column="likeCount" />
+		<result property="color1" column="color1" />
+		<result property="color2" column="color2" />
+		<result property="color3" column="color3" />
+		<result property="material" column="material" />
+	</resultMap>
+	
+	<resultMap type="productImageDTO" id="proImage">
+		<result property="no" column="no"/>
+		<result property="imageFileName" column="imageFileName"/>
+		<result property="regDate" column="regDate"/>
+		<result property="productNo" column="productNo"/>
+	</resultMap>
+	
+	<resultMap type="productInfoImageDTO" id="infoImage">
+		<result property="no" column="no"/>
+		<result property="imageFileName" column="imageFileName"/>
+		<result property="regDate" column="regDate"/>
+		<result property="productNo" column="productNo"/>
+	</resultMap>
+	
+	<resultMap type="productSizeDTO" id="proSize">
+		<result property="productNo" column="productNo"/>
+		<result property="productSize" column="productSize"/>
+		<result property="stock" column="stock"/>
+		<result property="topTotalLength" column="topTotalLength"/>
+		<result property="shoulderLength" column="shoulderLength"/>
+		<result property="chestCrossLength" column="chestCrossLength"/>
+		<result property="sleevelength" column="sleevelength"/>
+		<result property="waistCrossLength" column="waistCrossLength"/>
+		<result property="hipCrossLength" column="hipCrossLength"/>
+		<result property="thighCrossLength" column="thighCrossLength"/>
+		<result property="riseLength" column="riseLength"/>
+		<result property="hemCrossLength" column="hemCrossLength"/>
+		<result property="footLength" column="footLength"/>
+		<result property="ballOfFoot" column="ballOfFoot"/>
+		<result property="ankleHeight" column="ankleHeight"/>
+		<result property="instepHeight" column="instepHeight"/>
+	</resultMap>
+	
+	<resultMap type="reviewDTO" id="review">
+		<result property="reviewNo" column="reviewNo"/>
+		<result property="orderNo" column="orderNo"/>
+		<result property="memberId" column="memberId"/>
+		<result property="productNo" column="productNo"/>
+		<result property="productSize" column="productSize"/>
+		<result property="starScore" column="starScore"/>
+		<result property="sizeAssessment" column="sizeAssessment"/>
+		<result property="brightAssessment" column="brightAssessment"/>
+		<result property="colorAssessment" column="colorAssessment"/>
+		<result property="thickAssessment" column="thickAssessment"/>
+		<result property="deliveryAssessment" column="deliveryAssessment"/>
+		<result property="packAssessment" column="packAssessment"/>
+		<result property="content" column="content"/>
+		<result property="imageFileName" column="imageFileName"/>
+		<result property="regDate" column="regDate"/>
+		<result property="productName" column="productName"/>
+		<result property="memberGender" column="memberGender"/>
+		<result property="memberHeight" column="memberHeight"/>
+		<result property="memberWeight" column="replyCount"/>
+		<result property="replyCount" column="replyCount"/>
+		<result property="gender" column="gender" />
+		<result property="height" column="height" />
+		<result property="weight" column="weight" />
+	</resultMap>
+	
+	<resultMap type="reviewReplyDTO" id="reply">
+		<result property="replyNo" column="replyNo"/>
+		<result property="parentReplyNo" column="parentReplyNo"/>
+		<result property="memberId" column="memberId"/>
+		<result property="reviewNo" column="reviewNo"/>
+		<result property="content" column="content"/>
+		<result property="regDate" column="regDate"/>
+		<result property="childReplyCount" column="childReplyCount"/>
+	</resultMap>
+	
+	<resultMap type="questionDTO" id="quest">
+		<result property="questionNo" column="questionNo"/>
+		<result property="answerCnt" column="answerCnt"/>
+		<result property="memberId" column="memberId"/>
+		<result property="productNo" column="productNo"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="imageFileName" column="imageFileName"/>
+		<result property="regDate" column="regDate"/>
+	</resultMap>
+	
+	<resultMap type="answerDTO" id="answer">
+		<result property="answerNo" column="answerNo"/>
+		<result property="questionNo" column="questionNo"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="imageFileName" column="imageFileName"/>
+		<result property="regDate" column="regDate"/>
+	</resultMap>
+	
+	
+	<resultMap type = "searchDTO" id = "searchResult">
+		<result property = "brand" column = "brand" />
+		<result property = "bannerImageFileName" column = "bannerImageFileName" />
+		<result property = "count" column = "count" />
+		<result property = "name" column = "name" />
+		<result property = "productNo" column = "productNo" />
+		<result property = "price" column = "price" />
+		<result property = "imageFileName" column = "imageFileName" />
+		<result property = "reviewCount" column = "reviewCount" />
+		<result property = "starScore" column = "starScore" />
+		
+		<result property = "snapNo" column = "snapNo" />
+		<result property = "modelName" column = "modelName" />
+		<result property = "snapImageFileName" column = "snapImageFileName" />
+		<result property = "snapRegDate" column = "snapRegDate" />
+		
+		<result property = "magazineNo" column = "magazineNo" />
+		<result property = "category" column = "category" />
+		<result property = "title" column = "title" />
+		<result property = "magRegdate" column = "magRegdate" />
+	</resultMap>
+	
+	
+	
+	<!-- 4개의 테이블을 묶는 resultMap을 만들어서 사용 -->
+	<resultMap type="product_totalDTO" id="totalResult">
+		<result property="productNo" column="productNo"/>
+		<result property="parentProductNo" column="parentProductNo"/>
+		<result property="name" column="name"/>
+		<result property="brand" column="brand"/>
+		<result property="brandEng" column="brandEng"/>
+		<result property="gender" column="gender"/>
+		<result property="price" column="price"/>
+		<result property="category" column="category"/>
+		<result property="subCategory" column="subCategory"/>
+		<result property="color1" column="color1"/>
+		<result property="color2" column="color2"/>
+		<result property="color3" column="color3"/>
+		<result property="material" column="material"/>
+		
+		<result property="imageFileName" column="imageFileName"/>
+		
+		<result property="productSize" column="productSize"/>
+		<result property="topTotalLength" column="topTotalLength"/>
+		<result property="shoulderLength" column="shoulderLength"/>
+		<result property="chestCrossLength" column="chestCrossLength"/>
+		<result property="sleevelength" column="sleevelength"/>
+		<result property="waistCrossLength" column="waistCrossLength"/>
+		<result property="hipCrossLength" column="hipCrossLength"/>
+		<result property="thighCrossLength" column="thighCrossLength"/>
+		<result property="riseLength" column="riseLength"/>
+		<result property="hemCrossLength" column="hemCrossLength"/>
+		<result property="footLength" column="footLength"/>
+		<result property="ballOfFoot" column="ballOfFoot"/>
+		<result property="ankleHeight" column="ankleHeight"/>
+		<result property="instepHeight" column="instepHeight"/>
+		
+		<result property="avg_starScore" column="avg_starScore"/>
+		<result property="review_count" column="review_count"/>
+		
+	</resultMap>
+	
+	<select id="detailProduct" resultType="productDTO" parameterType="String">
+		SELECT p.*,
+	    (SELECT COUNT(*) FROM view_history v WHERE p.productNo = v.productNo AND v.viewdate >= ADD_MONTHS(SYSDATE, -1)) AS view_count,
+	    (SELECT COUNT(*) FROM product_like_bascket_tbl pl WHERE p.productNo = pl.productNo AND pl.inlike = 1) AS like_count
+		FROM product_base_tbl p where p.productNo=#{productNo}
+	</select>
+	
+	<select id="listProducts" resultMap="proBase" parameterType="String">
+		SELECT * FROM product_base_tbl WHERE productNo = #{targetProductNo} OR parentProductNo = #{targetProductNo}
+	</select>
+	
+	<select id="listTags" resultType="string" parameterType="string">
+	    SELECT r.tag FROM related_tag_tbl r JOIN product_base_tbl p ON r.productNo = p.productNo WHERE p.productNo = #{productNo}
+	</select>
+	
+	<select id="getInfoImageNumber" resultType="int" parameterType="String">
+      select infoImageFileNumber from product_info_image_tbl where productNo=#{productNo}
+   </select>
+	
+	<select id="listReviews" resultMap="review" parameterType="java.util.Map">
+		SELECT r.reviewNo, r.memberId, r.productNo, r.productSize, r.starScore, r.sizeAssessment, r.brightAssessment, r.colorAssessment, r.thickAssessment, r.deliveryAssessment, r.packAssessment, r.content, r.imageFileName, r.regDate, p.name as productName, m.gender as memberGender, m.height as memberHeight, m.weight as memberWeight, COUNT(rr.reviewNo) AS replyCount
+		FROM review_tbl r
+		INNER JOIN product_base_tbl p ON r.productNo = p.productNo
+		INNER JOIN member_base_tbl m ON r.memberId = m.id
+		LEFT JOIN review_reply_tbl rr ON r.reviewNo = rr.reviewNo
+		WHERE p.productNo = #{targetProductNo} OR p.parentProductNo = #{targetProductNo}
+		GROUP BY r.reviewNo, r.memberId, r.productNo, r.productSize, r.starScore, r.sizeAssessment, r.brightAssessment, r.colorAssessment, r.thickAssessment, r.deliveryAssessment, r.packAssessment, r.content, r.imageFileName, r.regDate, p.name, m.gender, m.height, m.weight
+	</select>
+	
+	<select id="listReplies" resultMap="reply" parameterType="java.util.Map">
+       <![CDATA[
+          SELECT * FROM (
+              SELECT rrt.*,
+                  ROW_NUMBER() OVER(PARTITION BY rrt.reviewNo ORDER BY rrt.replyNo) AS rn,
+                  (SELECT COUNT(*) FROM review_reply_tbl sub_rrt WHERE sub_rrt.parentReplyNo = rrt.replyNo) AS childReplyCount
+              FROM review_reply_tbl rrt
+              WHERE rrt.parentReplyNo IS NULL and rrt.reviewNo
+      ]]>
+      <choose>
+         <when test="reviewNoList != null and reviewNo == null">
+            IN
+            <foreach item="No" collection="reviewNoList" open="(" close=")" separator=",">
+               #{No}
+            </foreach> 
+            <![CDATA[) WHERE rn <= 2]]>
+         </when>
+         <when test="reviewNo != null and reviewNoList == null">
+            = #{reviewNo}) WHERE rn > 2
+         </when>
+      </choose>
+   </select>
+	
+	
+	<select id="listQuestions" resultMap="quest" parameterType="String">
+		SELECT 
+		    DISTINCT q.*,
+		    COALESCE(a.answer_count, 0) AS answer_count
+		FROM 
+		    question_tbl q
+		LEFT JOIN 
+		    (
+		        SELECT 
+		            questionNo, 
+		            COUNT(*) AS answer_count 
+		        FROM 
+		            answer_tbl 
+		        GROUP BY 
+		            questionNo 
+		    ) a ON q.questionNo = a.questionNo
+		LEFT JOIN 
+		    product_base_tbl p ON (q.productNo = p.productNo OR q.productNo = p.parentproductNo)
+		WHERE 
+		    p.productNo = #{targetProductNo} OR p.parentproductNo = #{targetProductNo}
+		ORDER BY 
+		    q.regdate DESC
+	</select>
+	
+	<select id="listAnswers" resultMap="answer" parameterType="java.util.List">
+		SELECT * FROM answer_tbl WHERE questionNo IN 
+		<foreach item="questionNo" collection="list" open="(" close=")" separator=",">
+	        #{questionNo}
+	    </foreach>
+	</select>
+		
+	<select id="listImages" resultMap="proImage" parameterType="string">
+		SELECT DISTINCT  i.*
+		FROM product_image_tbl i
+		JOIN product_base_tbl p ON p.productNo = i.productNo OR p.parentProductNo = i.productNo
+		WHERE p.productNo = #{targetProductNo} OR p.parentProductNo = #{targetProductNo}
+		ORDER BY i.no ASC
+	</select>
+	
+	<select id="listSizes" resultMap="proSize" parameterType="string">
+      select ps.* from product_size_tbl ps join product_base_tbl pb on ps.productNo=pb.productNo where pb.productNo=#{targetProductNo} or pb.PARENTPRODUCTNO=#{targetProductNo}
+   </select>
+	
+	<select id="getSalesTotal" resultType="int" parameterType="java.util.Map">
+		SELECT SUM(oh.quantity) FROM orderHistory oh
+		<if test="gender != null and gender != ''">
+			JOIN member_base_tbl mb ON oh.memberId = mb.id
+		</if>
+		WHERE oh.productNo = #{productNo} AND oh.orderDate >= ADD_MONTHS(SYSDATE, -#{month})
+		<if test="gender != null and gender != ''">
+			AND mb.gender = #{gender}
+		</if>
+	</select>
+	
+	<select id="getGenderViewCnt" resultType="int" parameterType="java.util.Map">
+		SELECT 
+		<choose>
+			<when test="gender != null and gender != ''">
+				(SELECT COUNT(*) FROM view_history vh INNER JOIN member_base_tbl mb ON vh.memberId = mb.id WHERE mb.gender = #{gender} AND vh.viewDate >= ADD_MONTHS(SYSDATE, -1) AND 
+			</when>
+			<otherwise>
+				count(*) from view_history vh where
+			</otherwise>
+		</choose>
+		vh.productNo = #{productNo}
+		<if test="gender != null and gender != ''">
+			) AS male_view_count from dual
+		</if>
+	</select>
+	
+	<select id="listAgePurchase" parameterType="map" resultType="int">
+	    SELECT SUM(quantity) AS purchase_count
+	    FROM orderHistory oh
+	    JOIN member_base_tbl mb ON oh.memberId = mb.id
+	    WHERE oh.productNo = #{productNo}
+	    AND (
+	        <choose>
+	            <!-- 조건: ageLimit이 18인 경우 -->
+	            <when test="ageLimit == 18">
+	                EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM TO_DATE(TO_CHAR(mb.birthDate), 'YYYYMMDD'))
+	                &lt;= 18
+	            </when>
+	            <!-- 조건: ageLimit이 39인 경우 -->
+	            <when test="ageLimit == 39">
+	                EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM TO_DATE(TO_CHAR(mb.birthDate), 'YYYYMMDD'))
+	                &gt;= 39
+	            </when>
+	            <!-- 기본 조건 (옵션) -->
+	            <otherwise>
+	                EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM TO_DATE(TO_CHAR(mb.birthDate), 'YYYYMMDD'))
+	                BETWEEN #{ageLimit} AND #{ageLimit}+4
+	            </otherwise>
+	        </choose>
+	    )
+	</select>
+	
+	<select id="listAgeView" parameterType="map" resultType="int">
+	    SELECT count(*) AS view_count
+	    FROM view_history vh
+	    JOIN member_base_tbl mb ON vh.memberId = mb.id
+	    WHERE vh.productNo = #{productNo}
+	    AND (
+	        <choose>
+	            <!-- 조건: ageLimit이 18인 경우 -->
+	            <when test="ageLimit == 18">
+	                EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM TO_DATE(TO_CHAR(mb.birthDate), 'YYYYMMDD'))
+	                &lt;= 18
+	            </when>
+	            <!-- 조건: ageLimit이 39인 경우 -->
+	            <when test="ageLimit == 39">
+	                EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM TO_DATE(TO_CHAR(mb.birthDate), 'YYYYMMDD'))
+	                &gt;= 39
+	            </when>
+	            <!-- 기본 조건 (옵션) -->
+	            <otherwise>
+	                EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM TO_DATE(TO_CHAR(mb.birthDate), 'YYYYMMDD'))
+	                BETWEEN #{ageLimit} AND #{ageLimit}+4
+	            </otherwise>
+	        </choose>
+	    )
+	</select>
+	
+	<insert id="addView" parameterType="java.util.Map">
+      <choose>
+         <when test="loginId==null">
+            INSERT into view_history values(#{no}, null, #{productNo}, sysdate, null)
+         </when>
+         <otherwise>
+            INSERT into view_history values(#{no}, #{loginId}, #{productNo}, sysdate, null)
+         </otherwise>
+      </choose>
+   </insert>
+   
+   
+   <select id = "listChildReplies" parameterType="Integer" resultMap="reply">
+      select * from review_reply_tbl where parentReplyNo=#{parentReplyNo}
+   </select>
+   
+   <insert id="insertReply" parameterType="java.util.Map">
+         insert into review_reply_tbl values(review_reply_seq.NEXTVAL, #{parentReplyNo}, #{memberId}, #{reviewNo}, #{content}, sysdate)
+   </insert>
+   
+   
+   
+   <select id = "productInfo" parameterType="String" resultType="reviewDTO">
+		<![CDATA[
+			select base.brand, base.name, img.imageFileName
+			from product_base_tbl base
+			JOIN product_image_tbl img on base.productNo = img.productNo
+			where base.productNo = #{productNo} and img.imageFileName = '1.jpg'
+		]]>
+	</select>
+	
+	<select id = "memberInfo" parameterType="String" resultType="reviewDTO">
+		<![CDATA[
+			select gender, height, weight from member_base_tbl where id = #{id}
+		]]>
+	</select>
+	
+	<select id = "selectReviewNo" resultType="int">
+		<![CDATA[
+			select COALESCE((max(reviewNo) + 1), 1) AS reviewNo from review_tbl
+		]]>
+	</select>
+	
+	<insert id = "insertReview" parameterType="java.util.Map">
+		<![CDATA[
+			insert into review_tbl values(#{reviewNo},#{orderNo},#{memberId},#{productNo},#{productSize},
+			(#{starScore} / 2), #{sizeAssessment}, #{brightAssessment}, #{colorAssessment}, #{thickAssessment},
+			#{deliveryAssessment}, #{packAssessment}, #{content}, #{imageFileName}, sysdate)
+		]]>
+	</insert>
+	
+	<select id = "selectNoImgName" parameterType="int" resultType="reviewDTO">
+	 	select reviewNo, imageFileName from review_tbl where orderNo = #{orderNo}
+	</select>
+	
+	<delete id = "deletReview" parameterType="int">
+		delete from review_tbl where orderNo = #{orderNo}
+	</delete>
+	
+	<select id = "selectReviewList" parameterType="int" resultType="reviewDTO">
+		select review.reviewNo, base.name, base.brand, review.productSize, review.productNo, review.starscore, 
+		review.sizeAssessment, review.brightAssessment, review.colorAssessment, review.thickAssessment, 
+		review.deliveryAssessment, review.packAssessment, review.content, review.imageFileName, orders.orderNo
+		from review_tbl review
+		JOIN product_base_tbl base on base.productNo = review.productNo
+		LEFT JOIN product_image_tbl img on review.productNo = img.productNo
+		LEFT JOIN orderHistory orders on orders.orderNo = review.orderNo
+		where img.imageFileName = '1.jpg' and review.orderNo = #{orderNo}
+	</select>
+
+	<update id = "updateReview" parameterType="java.util.Map">
+		<![CDATA[
+			update review_tbl set starScore = round(#{starScore} / 2,1), sizeAssessment = #{sizeAssessment}, brightAssessment =  #{brightAssessment},
+			colorAssessment = #{colorAssessment}, thickAssessment = #{thickAssessment}, deliveryAssessment = #{deliveryAssessment},
+			packAssessment = #{packAssessment}, content = #{content}, imageFileName = #{imageFileName}, regDate = sysdate where reviewNo = #{reviewNo}
+		]]>
+	</update>
+	
+	
+	<!-- 검색한 결과 브랜드 정보 가져오기  -->
+   <select id = "searchBrand" parameterType="String" resultMap="searchResult">
+      
+         SELECT DISTINCT base.brand, brand.bannerImageFileName 
+         FROM product_base_tbl base
+         JOIN brand_tbl brand on brand.brand = base.brand
+         WHERE lower(base.brand) LIKE '%' || lower(#{keyword}) || '%' or lower(base.brandEng) like '%' || lower(#{keyword}) || '%'
+      
+   </select>
+   
+   
+   <!-- 검색한 결과 상품 정보 가져오기 : 색상 입력 시 -->
+	<select id = "searchBycolor" parameterType="java.util.HashMap" resultMap="searchResult">
+	
+		SELECT DISTINCT base.productNo, base.name, base.brand, base.price AS price, img.imageFileName,
+		    count(review.reviewNo) AS reviewCount, nvl(sum(review.starscore) / count(review.reviewNo),0) as starScore,
+		  SQRT(
+		    POWER(TO_NUMBER(SUBSTR(base.color1, 2, 2), 'XX') - ${red}, 2) +
+		    POWER(TO_NUMBER(SUBSTR(base.color1, 4, 2), 'XX') - ${green}, 2) +
+		    POWER(TO_NUMBER(SUBSTR(base.color1, 6, 2), 'XX') - ${blue}, 2)
+		  ) AS distance
+		FROM product_base_tbl base
+		JOIN product_image_tbl img ON base.productNo = img.productNo AND img.imageFileName = '1.jpg'
+		LEFT JOIN related_tag_tbl tag ON base.productNo = tag.productNo
+		LEFT JOIN review_tbl review ON base.productNo = review.productNo
+		WHERE    
+		  color1 LIKE '#______' and
+		  SQRT(
+		    POWER(TO_NUMBER(SUBSTR(color1, 2, 2), 'XX') - #{red}, 2) +
+		    POWER(TO_NUMBER(SUBSTR(color1, 4, 2), 'XX') - #{green}, 2) +
+		    POWER(TO_NUMBER(SUBSTR(color1, 6, 2), 'XX') - #{blue}, 2)
+		  ) &lt; 40
+		  or
+		  color2 LIKE '#______' and
+		  SQRT(
+		    POWER(TO_NUMBER(SUBSTR(color2, 2, 2), 'XX') - #{red}, 2) +
+		    POWER(TO_NUMBER(SUBSTR(color2, 4, 2), 'XX') - #{green}, 2) +
+		    POWER(TO_NUMBER(SUBSTR(color2, 6, 2), 'XX') - #{blue}, 2)
+		  ) &lt; 40
+		  or
+		  color3 LIKE '#______' and
+		  SQRT(
+		    POWER(TO_NUMBER(SUBSTR(color3, 2, 2), 'XX') - #{red}, 2) +
+		    POWER(TO_NUMBER(SUBSTR(color3, 4, 2), 'XX') - #{green}, 2) +
+		    POWER(TO_NUMBER(SUBSTR(color3, 6, 2), 'XX') - #{blue}, 2)
+		  ) &lt; 40
+		GROUP BY base.productNo, base.name, base.brand, base.price, img.imageFileName, tag.tag,
+		SQRT(
+		    POWER(TO_NUMBER(SUBSTR(color1, 2, 2), 'XX') - ${red}, 2) +
+		    POWER(TO_NUMBER(SUBSTR(color1, 4, 2), 'XX') - ${green}, 2) +
+		    POWER(TO_NUMBER(SUBSTR(color1, 6, 2), 'XX') - ${blue}, 2)
+		  ) 
+		<if test = "orderBy == 'highPrice'">
+			ORDER BY price DESC
+		</if>
+		
+		<if test = "orderBy == 'lowPrice'">
+			ORDER BY price ASC
+		</if>
+		
+		<if test = "orderBy == 'starscore'">
+			ORDER BY starScore DESC
+		</if>
+		
+		<if test = "orderBy == 'reviewCount'">
+			ORDER BY reviewCount DESC
+		</if>
+		
+		<if test = "orderBy == null and orderBy == ''">
+			ORDER BY distance ASC
+		</if>		
+		
+	</select>
+	
+	<!-- 검색한 결과 상품 정보 가져오기 : 색상 제외 -->
+	<select id = "searchProductList" parameterType="java.util.Map" resultMap="searchResult">
+	
+		SELECT DISTINCT base.productNo, base.name, base.brand, base.price AS price, img.imageFileName,
+		    count(review.reviewNo) AS reviewCount, nvl(sum(review.starscore) / count(review.reviewNo),0) as starScore
+		FROM product_base_tbl base
+		JOIN product_image_tbl img ON base.productNo = img.productNo AND img.imageFileName = '1.jpg'
+		LEFT JOIN related_tag_tbl tag ON base.productNo = tag.productNo
+		LEFT JOIN review_tbl review ON base.productNo = review.productNo
+		WHERE 
+		    lower(base.productNo) LIKE '%' || lower(#{keyword}) || '%' OR  lower(base.name) LIKE '%' || lower(#{keyword}) || '%' OR 
+		    lower(base.brand) LIKE '%' || lower(#{keyword}) || '%' OR lower(base.brandEng) LIKE '%' || lower(#{keyword}) || '%' OR 
+		    lower(base.category) LIKE '%' || lower(#{keyword}) || '%' OR lower(base.subcategory) LIKE '%' || lower(#{keyword}) || '%' OR 
+		    lower(tag.tag) LIKE '%' || lower(#{keyword}) || '%' OR lower(base.material) LIKE '%' || lower(#{keyword}) || '%'
+		GROUP BY base.productNo, base.name, base.brand, base.price, img.imageFileName, tag.tag
+		        
+		<if test = "orderBy == 'highPrice'">
+			ORDER BY price DESC
+		</if>
+		
+		<if test = "orderBy == 'lowPrice'">
+			ORDER BY price ASC
+		</if>
+		
+		<if test = "orderBy == 'starscore'">
+			ORDER BY starScore DESC
+		</if>
+		
+		<if test = "orderBy == 'reviewCount'">
+			ORDER BY reviewCount DESC
+		</if>
+		
+		<if test = "orderBy == null and orderBy == ''">
+			ORDER BY distance ASC
+		</if>
+	</select>
+	
+	<!-- 검색한 결과 스냅 정보 가져오기 : 색싱 제외 -->
+	<select id = "searchSnapList" parameterType="java.util.Map" resultMap="searchResult">
+	
+		SELECT DISTINCT snap.snapNo, snap.name as modelName, snapImg.imagefilename as snapImageFileName, to_date(snapImg.regdate, 'YY.MM.DD') as snapRegDate, snap.brand
+		FROM snap_tbl snap
+		JOIN related_product_tbl rela ON snap.snapNo = rela.snapNo
+		LEFT JOIN snap_image_tbl snapImg ON snap.snapNo = snapImg.snapNo and snapImg.imageFileName = '1.jpg'
+		LEFT JOIN product_base_Tbl base On rela.productNo = base.productNo
+		LEFT JOIN related_tag_tbl tag ON rela.productNo = tag.productNo
+		WHERE 
+		    lower(base.productNo) LIKE '%' || lower(#{keyword}) || '%' OR  lower(base.name) LIKE '%' || lower(#{keyword}) || '%' OR 
+		    lower(base.brand) LIKE '%' || lower(#{keyword}) || '%' OR lower(base.brandEng) LIKE '%' || lower(#{keyword}) || '%' OR 
+		    lower(base.category) LIKE '%' || lower(#{keyword}) || '%' OR lower(base.subcategory) LIKE '%' || lower(#{keyword}) || '%' OR 
+		    lower(tag.tag) LIKE '%' || lower(#{keyword}) || '%' OR lower(snap.street) LIKE '%' || lower(#{keyword}) || '%' OR
+		    lower(snap.name) LIKE '%' || lower(#{keyword}) || '%' OR lower(base.material) LIKE '%' || lower(#{keyword}) || '%' OR
+		    lower(snap.job) LIKE '%' || lower(#{keyword}) || '%'OR lower(snap.snapNo) LIKE '%' || lower(#{keyword}) || '%'
+		<if test = "orderBy == 'newest'">
+			ORDER BY snapRegDate DESC
+		</if>
+		
+		<if test = "orderBy == 'oldest'">
+			ORDER BY snapRegDate ASC
+		</if>
+		
+		<if test = "orderBy == null and orderBy == ''">
+			ORDER BY distance ASC
+		</if>
+		
+	</select>
+	
+	<!-- 검색한 결과 매거진 정보 가져오기 : 색상 제외 -->
+	<select id = "searchMagazineList" parameterType="java.util.Map" resultMap="searchResult">
+	
+		SELECT DISTINCT magazine.brand, magazine.magazineNo, magazine.category, magazine.title, magazine.regdate as magRegdate
+		FROM magazine_tbl magazine
+		LEFT JOIN related_tag_tbl tag ON magazine.magazineNo = tag.magazineNo
+		LEFT JOIN product_base_tbl base ON base.brand = magazine.brand
+		WHERE
+		    lower(base.productNo) LIKE '%' || lower(#{keyword}) || '%' OR lower(base.name) LIKE '%' || lower(#{keyword}) || '%' OR 
+		    lower(magazine.brand) LIKE '%' || lower(#{keyword}) || '%' OR lower(magazine.brandEng) LIKE '%' || lower(#{keyword}) || '%' OR 
+		    lower(base.category) LIKE '%' || #{keyword} || '%' OR base.subcategory LIKE '%' || #{keyword} || '%' OR 
+		    lower(tag.tag) LIKE '%' || lower(#{keyword}) || '%' OR lower(magazine.title) Like '%' || lower(#{keyword}) || '%' OR 
+		    lower(magazine.subtitle) Like '%' || lower(#{keyword}) || '%' OR lower(magazine.content) Like '%' || lower(#{keyword}) || '%' OR
+		    lower(magazine.staff) Like '%' || lower(#{keyword}) || '%' OR lower(magazine.category) Like '%' || lower(#{keyword}) || '%'
+		
+		<if test = "orderBy == 'newest'">
+			ORDER BY magRegdate DESC
+		</if>
+		
+		<if test = "orderBy == 'oldest'">
+			ORDER BY magRegdate ASC
+		</if>
+		
+		<if test = "orderBy == null and orderBy == ''">
+			ORDER BY distance ASC
+		</if>
+	</select>
+	
+	<!-- 유진 상품 페이지 -->
+   
+   <select id="selectProductList" resultMap="totalResult" parameterType="Map">
+		<![CDATA[
+			WITH filtered_sizes AS (
+			  SELECT *
+			  FROM product_size_tbl
+			  WHERE 
+			    (topTotalLength >0 or shoulderLength>0 or chestCrossLength>0 or sleeveLength>0 or waistCrossLength>0
+			    or hipCrossLength>0 or thighCrossLength>0 or riseLength>0 or hemCrossLength>0 or footLength>0
+			    or ballOfFoot>0 or ankleHeight>0 or instepHeight>0)
+		]]>
+		<!-- 실측치 처리(measure) -->
+		
+		<if test="(topMin!=0 || topMin==0 )and topMax!=0">
+			<![CDATA[
+				and (toptotallength >= #{topMin} and toptotallength <= #{topMax})
+			]]>
+		</if>
+		<if test="(shoulderMin!=0 || shoulderMin==0)and shoulderMax!=0">
+			<![CDATA[
+				and (shoulderLength >= #{shoulderMin} and shoulderLength <= #{shoulderMax})
+			]]>
+		</if>
+		<if test="(chestMin!=0 || chestMin==0) and chestMax!=0">
+			<![CDATA[
+				and (chestCrossLength >= #{chestMin} and chestCrossLength <= #{chestMax})
+			]]>
+		</if>
+		<if test="(sleeveMin!=0 || sleeveMin==0) and sleeveMax!=0">
+			<![CDATA[
+				and (sleevelength >= #{sleeveMin} and sleevelength <= #{sleeveMax})
+			]]>
+		</if>
+		<if test="(waistMin!=0 || waistMin==0) and waistMax!=0">
+			<![CDATA[
+				and (waistCrossLength >= #{waistMin} and waistCrossLength <= #{waistMax})
+			]]>
+		</if>
+		<if test="(hipMin!=0 || hipMin==0) and hipMax!=0">
+			<![CDATA[
+				and (hipCrossLength >= #{hipMin} and hipCrossLength <= #{hipMax})
+			]]>
+		</if>
+		<if test="(thighMin!=0 || thighMin==0) and thighMax!=0">
+			<![CDATA[
+				and (thighCrossLength >= #{thighMin} and thighCrossLength <= #{thighMax})
+			]]>
+		</if>
+		<if test="(riseMin!=0 || riseMin==0 ) and riseMax!=0">
+			<![CDATA[
+				and (riseLength >= #{riseMin} and riseLength <= #{riseMax})
+			]]>
+		</if>
+		<if test="(hemCrossMin!=0 || hemCrossMin==0 ) and hemCrossMax!=0">
+			<![CDATA[
+				and (hemCrossLength >= #{hemCrossMin} and hemCrossLength <= #{hemCrossMax})
+			]]>
+		</if>
+		<if test="(footMin!=0 || footMin==0) and footMax!=0">
+			<![CDATA[
+				and (footLength >= #{footMin} and footLength <= #{footMax})
+			]]>
+		</if>
+		<if test="(ballMin!=0 || ballMin==0) and ballMax!=0">
+			<![CDATA[
+				and (ballOfFoot >= #{ballMin} and ballOfFoot <= #{ballMax})
+			]]>
+		</if>
+		<if test="(ankleMin!=0 || ankleMin==0) and ankleMax!=0">
+			<![CDATA[
+				and (ankleHeight >= #{ankleMin} and ankleHeight <= #{ankleMax})
+			]]>
+		</if>
+		<if test="(instepMin!=0 || instepMin==0) and instepMax!=0">
+			<![CDATA[
+				and (instepHeight >= #{instepMin} and instepHeight <= #{instepMax})
+			]]>
+		</if>
+			
+		<![CDATA[
+			)
+		]]>
+		<![CDATA[
+			,size_tbl AS (
+				  SELECT
+				    ROW_NUMBER() OVER(PARTITION BY siz.productNo ORDER BY siz.productSize) AS row_num,
+				    fs.*
+				  FROM product_size_tbl siz
+				  JOIN filtered_sizes fs ON siz.productNo = fs.productNo AND siz.productSize = fs.productSize
+				)
+		]]>
+		
+		
+		<if test="(red0 != null) and (green0 != null) and (blue0 != null)">			
+		<![CDATA[
+				,color_distance AS (
+				  SELECT
+				    productNo,
+				    SQRT(
+				      POWER(TO_NUMBER(SUBSTR(color1, 2, 2), 'XX') - ${red0}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 4, 2), 'XX') - ${green0}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 6, 2), 'XX') - ${blue0}, 2)
+				    ) AS distance
+				  FROM
+				    product_base_tbl
+				  WHERE
+				    (color1 LIKE '#______' AND
+				    SQRT(
+				      POWER(TO_NUMBER(SUBSTR(color1, 2, 2), 'XX') - #{red0}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 4, 2), 'XX') - #{green0}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 6, 2), 'XX') - #{blue0}, 2)
+				    ) <= 70)
+				    OR
+			
+				    (color2 LIKE '#______' AND
+				    SQRT(
+			
+				      POWER(TO_NUMBER(SUBSTR(color2, 2, 2), 'XX') - #{red0}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color2, 4, 2), 'XX') - #{green0}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color2, 6, 2), 'XX') - #{blue0}, 2)
+				    ) <= 70)
+				    OR
+				    (color3 LIKE '#______' AND
+				    SQRT(
+				      POWER(TO_NUMBER(SUBSTR(color3, 2, 2), 'XX') - #{red0}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color3, 4, 2), 'XX') - #{green0}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color3, 6, 2), 'XX') - #{blue0}, 2)
+				    ) <= 70)
+			]]>
+			<if test="(red1 != null) and (green1 != null) and (blue1 != null)">
+			<![CDATA[
+				    OR
+				    (color1 LIKE '#______' AND
+				    SQRT(
+				      POWER(TO_NUMBER(SUBSTR(color1, 2, 2), 'XX') - #{red1}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 4, 2), 'XX') - #{green1}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 6, 2), 'XX') - #{blue1}, 2)
+				    ) <= 70)
+				    OR
+			
+				    (color2 LIKE '#______' AND
+				    SQRT(
+			
+				      POWER(TO_NUMBER(SUBSTR(color2, 2, 2), 'XX') - #{red1}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color2, 4, 2), 'XX') - #{green1}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color2, 6, 2), 'XX') - #{blue1}, 2)
+				    ) <= 70)
+				    OR
+				    (color3 LIKE '#______' AND
+				    SQRT(
+				      POWER(TO_NUMBER(SUBSTR(color3, 2, 2), 'XX') - #{red1}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color3, 4, 2), 'XX') - #{green1}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color3, 6, 2), 'XX') - #{blue1}, 2)
+				    ) <= 70)
+			]]>
+			</if>  
+			<if test="(red2 != null) and (green2 != null) and (blue2 != null)">
+			<![CDATA[
+				    OR
+				    (color1 LIKE '#______' AND
+				    SQRT(
+				      POWER(TO_NUMBER(SUBSTR(color1, 2, 2), 'XX') - #{red2}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 4, 2), 'XX') - #{green2}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 6, 2), 'XX') - #{blue2}, 2)
+				    ) <= 70)
+				    OR
+			
+				    (color2 LIKE '#______' AND
+				    SQRT(
+			
+				      POWER(TO_NUMBER(SUBSTR(color2, 2, 2), 'XX') - #{red2}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color2, 4, 2), 'XX') - #{green2}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color2, 6, 2), 'XX') - #{blue2}, 2)
+				    ) <= 70)
+				    OR
+				    (color3 LIKE '#______' AND
+				    SQRT(
+				      POWER(TO_NUMBER(SUBSTR(color3, 2, 2), 'XX') - #{red2}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color3, 4, 2), 'XX') - #{green2}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color3, 6, 2), 'XX') - #{blue2}, 2)
+				    ) <= 70)
+			]]>
+			</if>
+			<if test="(red3 != null) and (green3 != null) and (blue3 != null)">
+			<![CDATA[
+				    OR
+				    (color1 LIKE '#______' AND
+				    SQRT(
+				      POWER(TO_NUMBER(SUBSTR(color1, 2, 2), 'XX') - #{red3}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 4, 2), 'XX') - #{green3}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 6, 2), 'XX') - #{blue3}, 2)
+				    ) <= 70)
+				    OR
+			
+				    (color2 LIKE '#______' AND
+				    SQRT(
+			
+				      POWER(TO_NUMBER(SUBSTR(color2, 2, 2), 'XX') - #{red3}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color2, 4, 2), 'XX') - #{green3}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color2, 6, 2), 'XX') - #{blue3}, 2)
+				    ) <= 70)
+				    OR
+				    (color3 LIKE '#______' AND
+				    SQRT(
+				      POWER(TO_NUMBER(SUBSTR(color3, 2, 2), 'XX') - #{red3}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color3, 4, 2), 'XX') - #{green3}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color3, 6, 2), 'XX') - #{blue3}, 2)
+				    ) <= 70)
+			]]>
+			</if>
+			<if test="(red4 != null) and (green4 != null) and (blue4 != null)">
+			<![CDATA[  
+				 
+				    OR
+				    (color1 LIKE '#______' AND
+				    SQRT(
+				      POWER(TO_NUMBER(SUBSTR(color1, 2, 2), 'XX') - #{red4}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 4, 2), 'XX') - #{green4}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color1, 6, 2), 'XX') - #{blue4}, 2)
+				    ) <= 70)
+				    OR
+			
+				    (color2 LIKE '#______' AND
+				    SQRT(
+			
+				      POWER(TO_NUMBER(SUBSTR(color2, 2, 2), 'XX') - #{red4}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color2, 4, 2), 'XX') - #{green4}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color2, 6, 2), 'XX') - #{blue4}, 2)
+				    ) <= 70)
+				    OR
+				    (color3 LIKE '#______' AND
+				    SQRT(
+				      POWER(TO_NUMBER(SUBSTR(color3, 2, 2), 'XX') - #{red4}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color3, 4, 2), 'XX') - #{green4}, 2) +
+				      POWER(TO_NUMBER(SUBSTR(color3, 6, 2), 'XX') - #{blue4}, 2)
+				    ) <= 70)
+			]]>
+			</if>
+			<![CDATA[
+				)
+			]]>
+		</if>
+		
+		<![CDATA[
+			SELECT
+			  base.productno, base.brand, base.name, base.brandEng, base.gender,
+			  TO_CHAR(base.price, 'FM999,999,999') AS price, base.category, base.subCategory,
+			  base.color1, base.color2, base.color3,
+			  
+			  pro_size.productSize,
+			  pro_size.topTotallength, 
+			  pro_size.shoulderLength, pro_size.chestCrossLength, 
+			  pro_size.sleeveLength, pro_size.waistCrossLength, pro_size.hipCrossLength,
+			  pro_size.thighCrossLength, pro_size.riseLength, 
+			  pro_size.hemCrossLength, pro_size.footLength, pro_size.ballOfFoot,
+			  pro_size.ankleHeight, pro_size.instepHeight,
+			  
+			  img.imageFileName,
+			  
+			  NVL(COUNT(review.reviewNo), 0) AS review_count,
+			  NVL(SUM(review.starscore) / COUNT(review.reviewNo), 0) AS avg_starScore
+		]]>
+		<if test="(red0 != null) and (green0 != null) and (blue0 != null)">
+			  ,c_distance.distance
+		</if>
+		<![CDATA[
+			FROM product_base_tbl base
+			JOIN size_tbl pro_size ON base.productNo = pro_size.productNo AND pro_size.row_num = 1
+			LEFT JOIN product_image_tbl img ON base.productNo = img.productNo
+			LEFT JOIN review_tbl review ON review.productNo = base.productNo
+		]]>
+		<if test="(red0 != null) and (green0 != null) and (blue0 != null)">
+			JOIN color_distance c_distance ON base.productNo = c_distance.productNo
+		</if>
+			
+		<![CDATA[	
+			WHERE 
+			  img.imagefilename = '1.jpg' 
+			  AND base.subcategory = #{subCategory}
+		]]>
+		
+		<!-- 검색 처리 -->
+		<!-- !="" 거나 !=null 은 인식 못함 -->
+  		<if test='search !=  "0" '>
+	         <![CDATA[
+	            AND ( lower(base.brand) like '%' || lower(#{search}) || '%' OR lower(base.brandeng) like '%' || lower(#{search}) || '%'
+	             or lower(base.productNo) like '%' || lower(#{search}) || '%'
+	             or lower(base.name) like '%'|| lower(#{search}) || '%' )
+	         ]]>
+	      </if>
+		
+		<!-- 가격대 설정 -->
+		<if test="priceMax!=0 and priceMin==0">
+	         <![CDATA[
+	            and base.price <= #{priceMax}
+	         ]]>
+	      </if>
+		<if test="priceMin!=0 and priceMax!=0">
+			<![CDATA[
+				and base.price >= #{priceMin} and price <= #{priceMax}
+			]]>
+		</if>
+		<if test="priceMin!=0 and priceMax==0">
+			<![CDATA[
+				and base.price >= #{priceMin}
+			]]>
+		</if>
+		
+		<![CDATA[
+			
+			GROUP BY
+			  base.productno, base.brand, base.brandEng, base.name, base.gender,
+			  base.price, base.category, base.subCategory,
+			  base.color1, base.color2, base.color3,
+			  
+			  pro_size.productSize, pro_size.topTotallength, 
+			  pro_size.shoulderLength, pro_size.chestCrossLength, 
+			  pro_size.sleeveLength, pro_size.waistCrossLength, pro_size.hipCrossLength,
+			  pro_size.thighCrossLength, pro_size.riseLength, 
+			  pro_size.hemCrossLength, pro_size.footLength, pro_size.ballOfFoot,
+			  pro_size.ankleHeight, pro_size.instepHeight,
+			  
+			  img.imageFileName,
+			  pro_size.row_num
+		]]> 
+		<if test="(red0 != null) and (green0 != null) and (blue0 != null)">
+			  , c_distance.distance
+		</if>
+		
+		<!-- align_bar -->
+		
+		<if test="align=='highPrice'">
+			<![CDATA[
+				order by base.price desc
+			]]>
+		</if>
+		
+		<if test="align=='lowPrice'">
+			<![CDATA[
+				order by base.price				
+			]]>
+		</if>
+		
+		<if test="align=='highStarScore'">
+			<![CDATA[
+				order by avg_starScore desc
+			]]>
+		</if>
+		
+		<if test="align=='highReview'">
+			<![CDATA[
+				order by review_count desc
+			]]>
+		</if>
+	</select>
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

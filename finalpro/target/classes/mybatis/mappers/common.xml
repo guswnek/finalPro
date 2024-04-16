@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.common">
+	<resultMap type="imageDTO" id="imgResult">
+		<result property="no" column="no"/>
+		<result property="imageFileName" column="imageFileName" />
+		<result property="regDate" column="regDate" />
+		<result property="brand" column="brand" />
+		<result property="productNo" column="productNo" />
+		<result property="magazineNo" column="magazineNo" />
+		<result property="title" column="title" />
+		<result property="subTitle" column="subTitle" />
+		<result property="content" column="content" />
+		<result property="imageNumber" column="imageNumber" />
+	</resultMap>
+	
+	<resultMap type="productDTO2" id="proResult">
+		<result property="No" column="No" />
+		<result property="parentProductNo" column="ParentProductNo" />
+		<result property="name" column="name" />
+		<result property="brand" column="brand" />
+		<result property="brandEng" column="brandEng" />
+		<result property="gender" column="gender" />
+		<result property="price" column="price" />
+		<result property="category" column="category" />
+		<result property="subCategory" column="subCategory" />
+		<result property="viewCount" column="viewCount" />
+		<result property="likeCount" column="likeCount" />
+		<result property="color1" column="color1" />
+		<result property="color2" column="color2" />
+		<result property="color3" column="color3" />
+		<result property="materiall" column="materiall" />
+		<result property="starScore" column="starScore" />
+		<result property="productCount" column="productCount" />
+		
+	</resultMap>
+	
+	<resultMap type="brandSnapDTO" id="brandResult">
+		<result property="snapNo" column="snapNo" />
+		<result property="brand" column="brand" />
+		<result property="color" column="color" />
+		<result property="name" column="name" />
+		<result property="job" column="job" />
+		<result property="height" column="height" />
+		<result property="weight" column="weight" />
+		<result property="viewCount" column="viewCount" />
+		<result property="productNo" column="productNo" />
+		<result property="tag" column="tag" />
+		
+		<result property="snapImageFileName" column="snapImageFileName" />
+		<result property="productImageFileName" column="productImageFileName" />
+	</resultMap>
+	
+
+	<!-- 메인페이지에서 상품 전체 순위 나타내기 -->
+
+	<select id="selectImageFileList" resultMap="imgResult">
+		<![CDATA[
+			SELECT base.productNo, img.imageFileName, COUNT(vh.productNo) AS viewCount
+			FROM product_base_tbl base
+			JOIN product_image_tbl img ON base.productNo = img.productNo
+			LEFT JOIN view_history vh ON base.productNo = vh.productNo
+			WHERE img.imageFileName = '1.jpg'
+			GROUP BY base.productNo, img.imageFileName
+			ORDER BY viewCount DESC
+			FETCH FIRST 10 ROWS ONLY
+		]]>
+	</select>
+	
+	<select id="selectProduct" resultMap="proResult" >
+		<![CDATA[
+			SELECT base.productNo, base.name, base.brand, base.price, COUNT(vh.viewNo) AS viewCount
+			FROM product_base_tbl base
+			LEFT JOIN view_history vh ON base.productNo = vh.productNo
+			GROUP BY base.productNo, base.name, base.brand, base.price
+			ORDER BY viewCount DESC
+			FETCH FIRST 10 ROWS ONLY
+		]]>
+	</select>
+	
+	<!-- 메인페이지에서 아우터 순위 나타내기 -->
+	
+	<select id="outerImageFileList" resultMap="imgResult">
+		<![CDATA[
+			SELECT base.productNo, img.imageFileName, COUNT(vh.productNo) AS viewCount
+			FROM product_base_tbl base
+			JOIN product_image_tbl img ON base.productNo = img.productNo
+			LEFT JOIN view_history vh ON base.productNo = vh.productNo
+			WHERE base.category = 'outer' AND img.imageFileName = '1.jpg'
+			GROUP BY base.productNo, img.imageFileName
+			ORDER BY viewCount DESC
+			FETCH FIRST 10 ROWS ONLY
+		]]>
+	</select>
+	
+	<select id="outerProduct" resultMap="proResult" >
+		<![CDATA[
+			SELECT base.productNo, base.name, base.brand, base.price, COUNT(vh.viewNo) AS viewCount
+			FROM product_base_tbl base
+			LEFT JOIN view_history vh ON base.productNo = vh.productNo
+			WHERE base.category = 'outer'
+			GROUP BY base.productNo, base.name, base.brand, base.price
+			ORDER BY viewCount DESC
+			FETCH FIRST 10 ROWS ONLY
+		]]>
+	</select>
+	
+	<!-- 메인페이지에서 상의 순위 나타내기 -->
+	
+	<select id="topImageFileList" resultMap="imgResult">
+		<![CDATA[
+			SELECT base.productNo, img.imageFileName, COUNT(vh.productNo) AS viewCount
+			FROM product_base_tbl base
+			JOIN product_image_tbl img ON base.productNo = img.productNo
+			LEFT JOIN view_history vh ON base.productNo = vh.productNo
+			WHERE base.category = 'top' AND img.imageFileName = '1.jpg'
+			GROUP BY base.productNo, img.imageFileName
+			ORDER BY viewCount DESC
+			FETCH FIRST 10 ROWS ONLY
+		]]>
+	</select>
+	
+	<select id="topProduct" resultMap="proResult" >
+		<![CDATA[
+			SELECT base.productNo, base.name, base.brand, base.price, COUNT(vh.viewNo) AS viewCount
+			FROM product_base_tbl base
+			LEFT JOIN view_history vh ON base.productNo = vh.productNo
+			WHERE base.category = 'top'
+			GROUP BY base.productNo, base.name, base.brand, base.price
+			ORDER BY viewCount DESC
+			FETCH FIRST 10 ROWS ONLY
+		]]>
+	</select>
+	
+	<!-- 메인페이지에서 하의 순위 나타내기 -->
+	
+	<select id="pantsImageFileList" resultMap="imgResult">
+		<![CDATA[
+			SELECT base.productNo, img.imageFileName, COUNT(vh.productNo) AS viewCount
+			FROM product_base_tbl base
+			JOIN product_image_tbl img ON base.productNo = img.productNo
+			LEFT JOIN view_history vh ON base.productNo = vh.productNo
+			WHERE base.category = 'pants' AND img.imageFileName = '1.jpg'
+			GROUP BY base.productNo, img.imageFileName
+			ORDER BY viewCount DESC
+			FETCH FIRST 10 ROWS ONLY
+		]]>
+	</select>
+	
+	<select id="pantsProduct" resultMap="proResult" >
+		<![CDATA[
+			SELECT base.productNo, base.name, base.brand, base.price, COUNT(vh.viewNo) AS viewCount
+			FROM product_base_tbl base
+			LEFT JOIN view_history vh ON base.productNo = vh.productNo
+			WHERE base.category = 'pants'
+			GROUP BY base.productNo, base.name, base.brand, base.price
+			ORDER BY viewCount DESC
+			FETCH FIRST 10 ROWS ONLY
+		]]>
+	</select>
+	
+	<!-- 메인페이지에서 신발 순위 나타내기 -->
+	
+	<select id="shoesImageFileList" resultMap="imgResult">
+		<![CDATA[
+			SELECT base.productNo, img.imageFileName, COUNT(vh.productNo) AS viewCount
+			FROM product_base_tbl base
+			JOIN product_image_tbl img ON base.productNo = img.productNo
+			LEFT JOIN view_history vh ON base.productNo = vh.productNo
+			WHERE base.category = 'shoes' AND img.imageFileName = '1.jpg'
+			GROUP BY base.productNo, img.imageFileName
+			ORDER BY viewCount DESC
+			FETCH FIRST 10 ROWS ONLY
+		]]>
+	</select>
+	
+	<select id="shoesProduct" resultMap="proResult" >
+		<![CDATA[
+			SELECT base.productNo, base.name, base.brand, base.price, COUNT(vh.viewNo) AS viewCount
+			FROM product_base_tbl base
+			LEFT JOIN view_history vh ON base.productNo = vh.productNo
+			WHERE base.category = 'shoes'
+			GROUP BY base.productNo, base.name, base.brand, base.price
+			ORDER BY viewCount DESC
+			FETCH FIRST 10 ROWS ONLY
+		]]>
+	</select>
+	
+	
+	<!-- 제품 클릭하면 제품 상세페이지로 갈 때 정보 가져오기 (나중에 현빈씨 걸로 바꾸면 됨)  -->
+	
+	<select id="selectImageFileList2" resultMap="imgResult">
+		<![CDATA[
+			select * from product_image_tbl where productNo=#{productNo}
+		]]>
+	</select>
+	
+	<select id="selectOneProduct" resultType="productDTO" parameterType="String">
+		<![CDATA[
+			select * from product_base_tbl where productNo=#{productNo}
+		]]>
+	</select>
+	
+	
+	
+	
+	<!-- 메인 페이지 스타일 탭에 브랜드 스냅샷 4개 가져오기 -->
+	
+	<select id="selectBrandSnap" resultMap="brandResult" >
+		<![CDATA[
+			SELECT base.snapNo, base.name, base.brand, base.price, base.productNo, base.productName, COUNT(vh.viewNo) AS viewCount
+			FROM snap_tbl base
+			LEFT JOIN view_history vh ON base.snapNo = vh.snapNo
+			WHERE base.street IS NULL
+			GROUP BY base.snapNo, base.name, base.brand, base.price, base.productNo, base.productName
+			ORDER BY viewCount DESC
+			FETCH FIRST 4 ROWS ONLY
+		]]>
+	</select>
+	
+	<select id="selectImageFileList3" resultMap="imgResult">
+		<![CDATA[
+			SELECT 
+			    base.snapNo, 
+			    img.imageFileName AS snapImageFileName, 
+			    pimg.imageFileName AS productImageFileName, 
+			    COUNT(vh.snapNo) AS viewCount
+			FROM 
+			    snap_tbl base
+			JOIN 
+			    snap_image_tbl img ON base.snapNo = img.snapNo
+			LEFT JOIN 
+			    view_history vh ON base.snapNo = vh.snapNo
+			LEFT JOIN 
+			    product_image_tbl pimg ON base.productNo = pimg.productNo AND pimg.imageFileName = '1.jpg'
+			WHERE 
+			    img.imageFileName = '1.jpg' 
+			    AND base.street IS NULL
+			GROUP BY 
+			    base.snapNo, 
+			    img.imageFileName, 
+			    pimg.imageFileName
+			ORDER BY 
+			    viewCount DESC
+			FETCH FIRST 4 ROWS ONLY      
+		]]>
+	</select>
+	
+	
+	<!-- 메인페이지에서 스트릿 스냅샷 4개 정보 가져오기 -->
+	<select id="selectStreetSnap" resultMap="brandResult" >
+		<![CDATA[
+			SELECT base.snapNo, base.name, base.street, base.price, base.productNo, base.productName, COUNT(vh.viewNo) AS viewCount
+			FROM snap_tbl base
+			LEFT JOIN view_history vh ON base.snapNo = vh.snapNo
+			WHERE base.street IS NOT NULL
+			GROUP BY base.snapNo, base.name, base.street, base.price, base.productNo, base.productName
+			ORDER BY viewCount DESC
+			FETCH FIRST 4 ROWS ONLY
+		]]>
+	</select>
+	
+	<select id="selectImageFileList5" resultMap="imgResult">
+		<![CDATA[
+			SELECT base.snapNo, img.imageFileName, COUNT(vh.snapNo) AS viewCount
+			FROM snap_tbl base
+			JOIN snap_image_tbl img ON base.snapNo = img.snapNo
+			LEFT JOIN view_history vh ON base.snapNo = vh.snapNo
+			WHERE img.imageFileName = '1.jpg' AND base.street IS NOT NULL
+			GROUP BY base.snapNo, img.imageFileName
+			ORDER BY viewCount DESC
+			FETCH FIRST 4 ROWS ONLY
+		]]>
+	</select>
+	
+	<!-- 매거진에서 메인 화면에 화보 사진 가져오기  -->
+	
+	<select id="selectPictorialMainImage" resultMap="imgResult">
+		<![CDATA[
+			SELECT magazineNo, brand, title, subTitle, imageNumber
+			FROM magazine_tbl
+			WHERE category = 'pictorial'
+			ORDER BY magazineNo DESC
+			FETCH FIRST 5 ROWS ONLY
+		]]>
+	</select>
+	
+	
+	<!-- 매거진에서 메인 화면에 룩북 사진 가져오기 -->
+	
+	<select id="selectLookbookMainImage" resultMap="imgResult">
+		<![CDATA[
+			SELECT magazineNo, brand, title, subTitle, imageNumber
+			FROM magazine_tbl
+			WHERE category = 'lookbook'
+			ORDER BY magazineNo DESC
+			FETCH FIRST 5 ROWS ONLY
+		]]>
+	</select>
+
+	
+	
+	
+	
+	
+	
+	
+	<!-- 브랜드 제품 리스트 페이지 -->
+	
+	<select id="brandProductList" resultType="productDTO2" parameterType="String">
+		<![CDATA[
+			SELECT 
+			    pb.*, 
+			    (SELECT AVG(starScore) 
+			     FROM review_tbl 
+			     WHERE productNo = pb.productNo) AS averageStarScore,
+			    (SELECT COUNT(*) 
+			     FROM view_history 
+			     WHERE productNo = pb.productNo) AS viewCount,
+			    (SELECT COUNT(*) 
+			     FROM product_like_bascket_tbl 
+			     WHERE productNo = pb.productNo AND inLike = 1) AS likeCount,
+			    (SELECT COUNT(*) 
+			     FROM review_tbl 
+			     WHERE productNo = pb.productNo) AS reviewCount
+			FROM 
+			    product_base_tbl pb
+			WHERE 
+			    pb.brand = #{brand}
+
+		]]>
+	</select>
+	
+	
+	<select id="brandProductImageList" resultMap="imgResult" parameterType="String">
+		<![CDATA[
+			SELECT base.productNo, img.imageFileName
+			FROM product_base_tbl base
+			JOIN product_image_tbl img ON base.productNo = img.productNo
+			WHERE img.imageFileName = '1.jpg'
+			  AND base.brand = #{brand}
+		]]>
+	</select>
+	
+	
+	<select id="brandImage" resultMap="imgResult" parameterType="String">
+		<![CDATA[
+			select * from brand_tbl where brand = #{brand}
+		]]>
+	</select>
+	
+	<!-- 브랜드 사이드 -->
+	<select id="listBrand" parameterType="java.util.Map" resultMap="proResult">
+	    SELECT 
+	        MIN(brand) AS brand,  
+	        brandEng,
+	        COUNT(*) AS productCount
+	    FROM 
+	        product_base_tbl
+	    <where>
+		    <if test="firstLetter != null and firstLetter != ''">
+		        (UPPER(brandEng) LIKE CONCAT(UPPER(#{firstLetter}), '%') OR 
+		         brand LIKE CONCAT(#{firstLetter}, '%'))
+		    </if>    
+		</where>
+	    GROUP BY 
+	        brandEng
+	</select>
+
+
+	
+</mapper>

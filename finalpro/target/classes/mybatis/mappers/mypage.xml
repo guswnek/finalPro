@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.mypage">
+   <resultMap type="mypageDTO" id="mypageResult">
+   	   <result property="no" column="no" />
+       <result property="imageFileName" column="imageFileName" />
+       <result property="brand" column="brand" />
+       <result property="name" column="name" />
+       <result property="subcategory" column="subcategory" />
+       <result property="productSize" column="productSize" />
+       <result property="orderDate" column="orderDate" />
+       <result property="orderNo" column="orderNo" />
+       <result property="orderPrice" column="orderPrice" />
+       <result property="deliveryStatus" column="deliveryStatus" />
+       <result property="quantity" column="quantity" />
+       <result property="likeCount" column="likeCount" />
+       <result property="inlike" column="inlike" />
+       <result property="inbascket" column="inbascket" />
+       <result property="price" column="price" />
+       <result property="productNo" column="productNo" />
+       <result property="color1" column="color1" />
+       <result property="count" column="count" />
+       <result property="stock" column="stock" />
+    </resultMap>
+    
+    <resultMap type="memberAddressDTO" id="adressResult">
+    	<result property="no" column="no" />
+		<result property="addressName" column="addressName" />
+		<result property="addressPhone" column="addressPhone" />
+		<result property="recipient" column="recipient" />
+		<result property="address" column="address" />
+	</resultMap>
+    
+    <select id="selectlikeList" parameterType="String" resultMap="mypageResult">
+      <![CDATA[
+         SELECT likeProduct.no, img.imageFileName, base.brand, base.name, TO_CHAR(base.price, 'FM999,999,999') AS price, base.productNo, COUNT(likeProduct.no) AS likeCount, likeProduct.inlike, likeProduct.inbascket 
+         FROM product_base_tbl base
+         JOIN product_like_bascket_tbl likeProduct ON base.productNo = likeProduct.productNo
+         LEFT JOIN product_image_tbl img ON img.productNo = base.productNo AND img.imageFileName = '1.jpg'
+         WHERE memberId = #{id} AND (likeProduct.inLike = 1 or likeProduct.inBascket = 1)
+         GROUP BY likeProduct.no, img.imageFileName, base.brand, base.name, base.price, base.productNo, likeProduct.inlike, likeProduct.inBascket
+      ]]>
+   </select>
+   
+   <select id="maxOrderNo" resultType="int" parameterType="java.util.Map">
+      select 
+       <choose>
+           <when test="tableName == 'product_like_bascket_tbl'">
+               COALESCE(MAX(no)+1, 1) AS no FROM product_like_bascket_tbl
+           </when>
+           <when test="tableName == 'orderHistory'">
+               COALESCE((max(orderNo)+ 1),1) As orderNo from orderHistory
+           </when>
+           <when test="tableName == 'view_history'">
+              COALESCE(MAX(viewNo)+1, 1) as viewNo FROM view_history
+           </when>
+        </choose>
+   </select>
+   
+   <select id="checkBasket" parameterType="java.util.Map" resultType="int">
+      <![CDATA[
+         select count(*) from product_like_bascket_tbl where memberId = #{id} and productNo = #{productNo} and inbascket = 1 
+      ]]>
+   </select>
+
+   <insert id="addLike" parameterType="java.util.Map">
+      insert into product_like_bascket_tbl values(#{maxOrderNo}, #{loginId}, #{productNo}, 1, 0, null, 0, sysdate)
+   </insert>
+
+   
+   <insert id="addbascket" parameterType="java.util.Map">
+      insert into product_like_bascket_tbl values(#{maxOrderNo}, #{loginId}, #{productNo}, 0, 1, #{size}, 2, sysdate)
+   </insert>
+   
+   <update id="modLike" parameterType="java.util.Map">
+      UPDATE product_like_bascket_tbl set inlike=1 where memberId=#{loginId} and productNo=#{productNo}
+   </update>
+   
+   <update id="modbascket" parameterType="java.util.Map">
+      UPDATE product_like_bascket_tbl set inbascket=1, productSize=#{size}, count=#{quantity} where memberId=#{loginId} and productNo=#{productNo}
+   </update>
+   
+   <select id="selectCartList" parameterType="String" resultMap="mypageResult">
+		<![CDATA[
+			select bascket.No, base.productNo, base.brand, base.name, to_char(base.price, 'FM999,999,999') AS price, base.color1,
+			bascket.productSize, bascket.count, pro_size.stock, img.imageFileName, to_char((base.price * bascket.count), 'FM999,999,999') AS orderPrice
+			from product_like_bascket_tbl bascket 
+			JOIN product_base_tbl base on base.productNo = bascket.productNo
+			LEFT JOIN product_size_tbl pro_size on bascket.productSize = pro_size.productSize and bascket.productNo = pro_size.productNo
+			LEFT JOIN product_image_tbl img on bascket.productNo = img.productNo 
+			where bascket.inBascket = 1 and memberId = #{id} and imageFileName = '1.jpg'
+		]]>
+	</select>
+	
+	<select id="selectCountSize" parameterType="int" resultType="int">
+		<![CDATA[
+			select count from product_like_bascket_tbl 
+			where inBascket = 1 and no = #{no}
+		]]>
+	</select>
+	
+	<select id="selectStockbySize" parameterType="java.util.Map"
+		resultType="int">
+		<![CDATA[
+			select stock
+			from product_size_tbl where productSize = #{productSize} and productNo = #{productNo}
+		]]>
+	</select>
+	
+	<update id="updateCount" parameterType="java.util.Map">
+		<![CDATA[
+			update product_like_bascket_tbl set count = #{count} where no = #{no}
+		]]>
+	</update>
+	
+	<select id="checkLike" parameterType="int" resultType="int">
+		<![CDATA[
+			select count(*) from product_like_bascket_tbl where no = #{no} and inlike = 1
+		]]>
+	</select>
+	
+	<update id="updateCart" parameterType="int">
+		<![CDATA[
+			update product_like_bascket_tbl set inBascket = 0 where no = #{no}
+		]]>
+	</update>
+
+	<delete id="deleteCart" parameterType="int">
+		<![CDATA[
+			delete from product_like_bascket_tbl where no = #{no}
+		]]>
+	</delete>
+	
+	<select id="selectNoCountProduct" parameterType="String" resultMap="mypageResult">
+		<![CDATA[
+			select no from product_like_bascket_tbl where memberId = #{id} and count = 0  
+		]]>
+	</select>
+	
+	<select id="addressList" parameterType="String" resultMap="adressResult">
+		<![CDATA[
+			select addr.no, addr.addressName, addr.addressPhone, addr.recipient, addr.address
+			from member_base_tbl mbase
+			JOIN member_address_tbl addr on mbase.id = addr.memberId
+			where id = #{id}
+		]]>
+	</select>
+	
+	<select id="recepitList" parameterType="int" resultType="mypageDTO">
+		<![CDATA[
+			select bascket.no, bascket.productNo, bascket.productSize, bascket.count, to_char((bascket.count * base.price), 'FM999,999,999') AS orderPrice,
+			base.brand, base.color1, base.name,
+			img.imageFileName
+			from product_like_bascket_tbl bascket
+			JOIN product_base_tbl base on bascket.productNo = base.productNo
+			LEFT JOIN product_image_tbl img on bascket.productNo = img.productNo 
+			where imageFileName = '1.jpg' and bascket.no = #{no}
+		]]>
+	</select>
+	
+	<insert id="insertOrderList" parameterType="java.util.Map">
+		<![CDATA[
+			insert into orderhistory values(#{orderNo}, #{memberId}, #{productNo},
+			#{productSize}, sysdate, #{intPrice}, #{count}, '결제', #{deliveryRequest},
+			#{receiverName}, #{receiverPhone}, #{receiverAdress}, #{payment}, #{paymentCard},
+			#{paymentMonth}, #{paymentBank})
+		]]>
+	</insert>
+
+	<update id="updateStock" parameterType="java.util.Map">
+		<![CDATA[
+			update product_size_tbl set stock = #{stock} where productNo = #{productNo} and productSize = #{productSize}
+		]]>
+	</update>
+	
+	<select id="selectOrderListAll" parameterType="java.util.Map"
+      resultMap="mypageResult">
+      SELECT ord.orderNo, ord.orderDate,
+      to_char(ord.orderPrice,'FM999,999,999') AS orderPrice,
+      ord.deliveryStatus, ord.productSize, ord.quantity,
+      img.imagefilename,
+      base.brand,base.name, base.SUBCATEGORY, base.productNo, base.color1
+      FROM orderHistory ord
+      JOIN product_base_tbl base ON ord.productNo = base.productNo
+      LEFT JOIN
+      product_image_tbl img ON ord.productNo = img.productNo
+      WHERE
+      ord.memberId = #{memberId} and img.imageFileName = '1.jpg'
+
+      <if test="deliveryStatus != null and deliveryStatus != ''">
+         and deliveryStatus = #{deliveryStatus}
+      </if>
+
+      <if
+         test="fromDate != null and toDate != null and fromDate != '' and toDate != ''">
+         and orderDate &gt; to_date(#{fromDate}, 'YYYY-MM-DD') and
+         orderDate &lt;
+         to_date(#{toDate}, 'YYYY-MM-DD') + 1
+      </if>
+
+      <if test="productName != null and productName != ''">
+         and (name LIKE '%' || #{productName} || '%' or brand LIKE'%' ||#{productName} || '%' 
+         or brandEng LIKE '%' || #{productName} || '%') 
+      </if>
+
+      order by ord.orderDate desc, ord.orderNo desc
+   </select>
+	
+	<select id="selectReviewOrderNos" resultMap="mypageResult">
+		<![CDATA[
+			select orderNo from review_tbl
+		]]>
+	</select>
+	
+	<select id="delivery_pay_info" parameterType="int" resultType="mypageDTO">
+		<![CDATA[
+			select deliveryRequest, receiverName, receiverPhone, receiverAdress, payment, paymentCard, paymentMonth, paymentBank, to_char((orderPrice), 'FM999,999,999') as orderPrice
+			from orderHistory where orderNo = #{orderNo}
+		]]>
+	</select>
+	
+	<update id="updateDeliveryStatus" parameterType="java.util.Map">
+		<![CDATA[
+			update orderHistory set deliveryStatus = #{deliveryStatus} where orderNo = #{orderNo}
+		]]>
+	</update>
+	
+	<select id="selectCountProductSize" parameterType="int" resultType="mypageDTO">
+		<![CDATA[
+			select productNo, productSize, quantity from orderhistory where orderNo = #{orderNo}
+		]]>
+	</select>
+
+	<update id="updateLike" parameterType="java.util.Map">
+		<![CDATA[
+			update product_like_bascket_tbl set inlike = 0 where memberId = #{id} and productNo = #{productNo}
+		]]>
+	</update>
+
+	<delete id="deleteLike" parameterType="java.util.Map">
+		<![CDATA[
+			delete from product_like_bascket_tbl where memberId = #{id} and productNo = #{productNo}
+		]]>
+	</delete>
+	
+	<select id="selectRecentList" parameterType="String"
+		resultMap="mypageResult">
+		<![CDATA[
+			SELECT DISTINCT productNo, brand, name, price, imageFileName
+			FROM (
+			    SELECT base.productNo, base.brand, base.name, TO_CHAR(base.price, 'FM999,999,999') AS price, img.imageFileName,
+			           ROW_NUMBER() OVER (PARTITION BY views.productNo ORDER BY viewNo DESC) AS rn
+			    FROM product_base_tbl base
+			    JOIN view_history views ON base.productNo = views.productNo
+			    LEFT JOIN product_image_tbl img ON base.productNo = img.productNo
+			    WHERE img.imageFileName = '1.jpg' AND memberId = #{id}
+				ORDER BY viewNo DESC
+			)
+			WHERE rn <= 10
+		]]>
+	</select>
+	
+	
+	<select id = "selectQuestionNo" resultType="int">
+      <![CDATA[
+         select COALESCE((max(QUESTIONNO) + 1), 1) AS reviewNo from question_tbl
+      ]]>
+   </select>
+   
+   <insert id = "insertQuestion" parameterType="java.util.Map">
+      <![CDATA[
+         insert into question_tbl values(#{questionNo},#{memberId},#{productNo},#{productSize},
+         #{title}, #{content}, #{imageFileName}, sysdate)
+      ]]>
+   </insert>
+</mapper>

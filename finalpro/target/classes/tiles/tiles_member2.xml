@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apach Software Foundation//DTD Tiles Configuration 2.0//En"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+	
+	<tiles-definitions>
+		<definition name="mainLayout" template="/WEB-INF/views/common/layout2.jsp">
+			<put-attribute name="title" value=""/>
+			<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+			<put-attribute name="body" value=""/>
+			<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+		</definition>
+		
+		<definition name="/member/loginForm" extends="mainLayout">
+			<put-attribute name="title" value="로그인창"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
+		</definition>
+		<definition name="/member/JoinMember" extends="mainLayout">
+			<put-attribute name="title" value="회원가입 창"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/JoinMember.jsp"/>
+		</definition>
+		<definition name="/member/FindId" extends="mainLayout">
+			<put-attribute name="title" value="아이디 찾기 창"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/FindId.jsp"/>
+		</definition>
+				<definition name="/member/FindPw" extends="mainLayout">
+			<put-attribute name="title" value="비밀번호 찾기 창"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/FindPw.jsp"/>
+		</definition>
+		<definition name="/member/memberDetail" extends="mainLayout">
+			<put-attribute name="title" value="회원정보 및 수정 창"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/memberDetail.jsp"/>
+		</definition>
+		<definition name="/member/searchId" extends="mainLayout">
+			<put-attribute name="title" value="아이디 찾기(정보)"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/searchId.jsp"/>
+		</definition>
+				<definition name="/member/searchPw" extends="mainLayout">
+			<put-attribute name="title" value="비밀번호 찾기(정보)"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/searchPw.jsp"/>
+		</definition>
+		<!-- 	<definition name="/member/addAddressForm" extends="mainLayout">
+			<put-attribute name="title" value="주소추가"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/addAddressForm.jsp"/>
+			</definition> -->
+			<definition name="/member/newPwd" extends="mainLayout">
+			<put-attribute name="title" value="새 비밀번호 수정"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/newPwd.jsp"/>
+			</definition>
+			<definition name="/member/memberDetailForm" extends="mainLayout">
+			<put-attribute name="title" value="기본정보수정"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/memberDetailForm.jsp"/>
+			</definition>
+	 		<definition name="/member/addressDetailForm" extends="mainLayout">
+			<put-attribute name="title" value="주소정보"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/addressDetailForm.jsp"/>
+			</definition> 
+			<definition name="/member/mySize" extends="mainLayout">
+			<put-attribute name="title" value="나의 사이즈"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/mySize.jsp"/>
+			</definition>
+			<definition name="/member/sizeRecommend" extends="mainLayout">
+			<put-attribute name="title" value="나의 사이즈 추천"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/sizeRecommend.jsp"/>
+			</definition>
+			<definition name="/member/myPage" extends="mainLayout">
+			<put-attribute name="title" value="마이페이지"/>
+			<put-attribute name="body" value="/WEB-INF/views/mypage/orderList.jsp"/>
+			</definition>
+			<definition name="/member/identity" extends="mainLayout">
+			<put-attribute name="title" value="본인인증"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/identity.jsp"/>
+			</definition> 
+			<definition name="/member/agree" extends="mainLayout">
+			<put-attribute name="title" value="약관동의"/>
+			<put-attribute name="body" value="/WEB-INF/views/member/agree.jsp"/>
+			</definition> 
+			
+	</tiles-definitions>
